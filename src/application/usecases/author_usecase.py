@@ -2,10 +2,9 @@ from dataclasses import dataclass
 
 from src.application.repository.contract import IRepository
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class AuthorUsecase:
-    def __init__(self, repo: IRepository):
-        self.repo = repo
+    repo: IRepository
         
     def create(self):
         ...
