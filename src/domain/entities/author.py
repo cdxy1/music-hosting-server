@@ -19,8 +19,11 @@ class Author:
             raise ValueError("Author id must be UUID")
         
     def _ensure_name_is_str(self):
-        if not self.name and not isinstance(self.name, str):
+        if not isinstance(self.name, str):
             raise ValueError("Author name must be string")
+        
+        if not self.name.strip():
+            raise ValueError("Author name must be non-empty")
         
     def _ensure_author_type(self):
         ...
