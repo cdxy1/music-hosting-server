@@ -3,27 +3,22 @@ from typing import TypeVar
 
 T = TypeVar("T")
 
+
 class IRepository(ABC):
     @abstractmethod
-    def get_by_id(self) -> T:
-        ...
-    
-    @abstractmethod    
-    def get_all(self) -> list[T]:
-        ...
-        
+    def get_by_id(self) -> T: ...
+
     @abstractmethod
-    def create(self) -> bool:
-        ...
-        
+    def get_all(self) -> list[T]: ...
+
     @abstractmethod
-    def update(self) -> bool:
-        ...
-        
+    def create(self) -> bool: ...
+
     @abstractmethod
-    def delete(abs) -> bool:
-        ...
-    
+    def update(self) -> bool: ...
+
     @abstractmethod
-    def exists(self) -> bool:
-        ...
+    def delete(abs) -> bool: ...
+
+    @abstractmethod
+    def exists(self) -> bool: ...
