@@ -20,8 +20,7 @@ class IUnitOfWork(ABC):
 
     # @abstractmethod
     # async def rollback(self): ...
-    
+
     @abstractmethod
     @asynccontextmanager
-    async def __call__(self):
-        ...
+    async def __call__(self): ...
