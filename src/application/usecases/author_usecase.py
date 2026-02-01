@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
+from src.application.dto.author_dto import AuthorDTO
 from src.application.repository.contract import IRepository
-from src.application.usecases.dto.author_dto import AuthorDTO
 
 
 @dataclass(frozen=True, slots=True)
