@@ -1,12 +1,11 @@
 from abc import ABC, abstractmethod
 
+from sqlalchemy.ext.asyncio import AsyncSession
+
 
 class IDatabase(ABC):
     @abstractmethod
     def _create_engine(self): ...
 
     @abstractmethod
-    def _create_session(self): ...
-
-    @abstractmethod
-    def get_session(self): ...
+    def create_session(self) -> AsyncSession: ...
