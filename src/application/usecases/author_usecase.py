@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 
 from src.application.repository.contract import IRepository
+from src.domain.entities.author import Author
+
 
 @dataclass(frozen=True, slots=True)
 class AuthorUsecase:

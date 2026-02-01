@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass(frozen=True, init=False)
 class TrackUsecase:
     def __init__(self):
