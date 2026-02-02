@@ -1,3 +1,0 @@
-class DatabaseConfig:
-    @property
-    def database_uri(self) -> str: ...
