@@ -38,7 +38,6 @@ class UnitOfWork(IUnitOfWork):
             session = self._database.create_session()
             yield session
             session.commit()
-            ...
         except Exception:
             session.rollback()
         finally:
