@@ -1,17 +1,14 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.application.dto.author_dto import AuthorDTO
-from src.infrastructure.models.author import AuthorModel
 from src.application.repository.contract import IRepository
+from src.infrastructure.models.author import AuthorModel
 
 
-class AuthorRepository(IRepository):
-    def __init__(self, session: AsyncSession):
-        self._session = session
-        
-    def create(self, author: AuthorDTO):
+class AuthorRepository(IRepository):  
+    def create(self, session: AsyncSession, author: AuthorDTO):
         author = AuthorModel(
-            name=AuthorDTO.name,
-            type=AuthorDTO.type,
+            name=author.name,
+            type=author.type,
         )
-        self._session.add(author)
+        session.add(author)

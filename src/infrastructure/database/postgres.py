@@ -1,3 +1,5 @@
+from asyncio import current_task
+
 from sqlalchemy.ext.asyncio import (
     AsyncEngine,
     AsyncSession,
@@ -6,9 +8,9 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
-from src.infrastructure.models.base import BaseOrmModel
 from src.infrastructure.config.contract import IDatabaseConfig
 from src.infrastructure.database.contract import IDatabase
+from src.infrastructure.models.base import BaseOrmModel
 
 
 class PostgresDatabase(IDatabase):
@@ -21,12 +23,13 @@ class PostgresDatabase(IDatabase):
     def create_session(self) -> AsyncSession:
         return async_scoped_session(
             async_sessionmaker(
-                self.engine,
+                self._engine,
                 autoflush=False,
                 expire_on_commit=False,
-            )
+            ),
+            scopefunc=current_task
         )
         
     async def create_tables(self):
-        async with self.engine.begin() as conn:
+        async with self._engine.begin() as conn:
             await conn.run_sync(BaseOrmModel.metadata.create_all)

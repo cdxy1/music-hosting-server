@@ -15,4 +15,4 @@ class PostgresConfig(IDatabaseConfig):
         db_password = os.environ.get("DB_PASSWORD")
         db_name = os.environ.get("DB_NAME")
         
-        return f"postgresql+psycopg2://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
+        return f"postgresql+asyncpg://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
