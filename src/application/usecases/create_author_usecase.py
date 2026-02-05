@@ -14,4 +14,4 @@ class CreateAuthorUsecase:
     async def __call__(self, author: AuthorDTO):
         uow = self.uow_factory()    
         async with uow() as session:
-            created_author = self.repo().create(session, author)
+            created_author = self.repo.create(session, author)
