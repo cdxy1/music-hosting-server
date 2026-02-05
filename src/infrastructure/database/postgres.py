@@ -30,6 +30,9 @@ class PostgresDatabase(IDatabase):
             scopefunc=current_task
         )
         
-    async def create_tables(self):
+    async def create_tables(self) -> None:
         async with self._engine.begin() as conn:
             await conn.run_sync(BaseOrmModel.metadata.create_all)
+            
+    def close_all_connections(self) -> None:
+        self._engine.dispose()
