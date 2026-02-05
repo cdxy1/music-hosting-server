@@ -1,4 +1,4 @@
-.PHONY: lint, fmt
+.PHONY: lint, fmt, run
 
 lint:
 	uv run ruff check --fix
@@ -12,3 +12,5 @@ up:
 down:
 	docker compose down
 
+run:
+	PYTHONPATH=. uv run src/setup/bootstrap.py
