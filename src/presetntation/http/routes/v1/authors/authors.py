@@ -11,12 +11,13 @@ from src.presetntation.http.schemas.author import (
 
 router = APIRouter(prefix="/authors", tags=["authors"])
 
-@router.get("/")
-async def get_authors(author: CreateAuthorRequest, usecase: CreateAuthorUsecase = Depends(get_create_author_usecase)) -> CreateAuthorResponse:
-    usecase()
-
 @router.post("/")
-async def create_author():
+async def create_author(author: CreateAuthorRequest, usecase: CreateAuthorUsecase = Depends(get_create_author_usecase)) -> CreateAuthorResponse:
+    from src.application.dto.author_dto import AuthorDTO
+    usecase(AuthorDTO(name=author.name, type=author.type))
+    
+@router.get("/")
+async def get_authors():
     ...
 
 @router.get("/{author_id}")
