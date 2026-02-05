@@ -1,8 +1,13 @@
 from fastapi import APIRouter, Depends
 
-from src.presetntation.http.schemas.author import CreateAuthorRequest, CreateAuthorResponse
 from src.application.usecases.create_author_usecase import CreateAuthorUsecase
-from src.presetntation.http.dependencies.author_usecases import get_create_author_usecase
+from src.presetntation.http.dependencies.author_usecases import (
+    get_create_author_usecase,
+)
+from src.presetntation.http.schemas.author import (
+    CreateAuthorRequest,
+    CreateAuthorResponse,
+)
 
 router = APIRouter(prefix="/authors", tags=["authors"])
 

@@ -4,6 +4,7 @@ from fastapi import FastAPI
 
 from src.presetntation.http.routes.root import get_root_router
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     yield
