@@ -14,7 +14,7 @@ router = APIRouter(prefix="/authors", tags=["authors"])
 @router.post("/")
 async def create_author(author: CreateAuthorRequest, usecase: CreateAuthorUsecase = Depends(get_create_author_usecase)) -> CreateAuthorResponse:
     from src.application.dto.author_dto import AuthorDTO
-    usecase(AuthorDTO(name=author.name, type=author.type))
+    await usecase(AuthorDTO(name=author.name, type=author.type))
     
 @router.get("/")
 async def get_authors():
