@@ -34,5 +34,5 @@ class PostgresDatabase(IDatabase):
         async with self._engine.begin() as conn:
             await conn.run_sync(BaseOrmModel.metadata.create_all)
             
-    def close_all_connections(self) -> None:
-        self._engine.dispose()
+    async def close_all_connections(self) -> None:
+        await self._engine.dispose()
