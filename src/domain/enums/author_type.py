@@ -1,6 +1,6 @@
 from enum import Enum
 
 
-class AuthorType(Enum):
+class AuthorType(str, Enum):
     PERSON = "person"
     GROUP = "group"

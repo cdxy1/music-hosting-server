@@ -1,12 +1,12 @@
-from dataclasses import dataclass
-from uuid import UUID
+from dataclasses import dataclass, field
+from uuid import UUID, uuid4
 
 from src.domain.enums.author_type import AuthorType
 
 
 @dataclass(frozen=True, slots=True)
 class Author:
-    id: UUID
+    id: UUID = field(init=False, default_factory=uuid4)
     name: str
     type: AuthorType
 
