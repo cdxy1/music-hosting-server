@@ -1,4 +1,4 @@
-.PHONY: lint, fmt, run, run-debug
+.PHONY: lint, fmt, run, run-debug, migrate, upgrade
 
 lint:
 	uv run ruff check --fix
@@ -17,3 +17,9 @@ run:
 
 run-debug:
 	uv run uvicorn src.setup.composition_root:app --reload
+
+migrate:
+	uv run alembic revision --autogenerate -m "$(msg)"
+
+upgrade:
+	uv run alembic upgrade head
