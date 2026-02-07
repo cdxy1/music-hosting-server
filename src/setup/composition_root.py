@@ -4,7 +4,9 @@ from fastapi import FastAPI
 
 from src.infrastructure.config.postgres import PostgresConfig
 from src.infrastructure.database.postgres import PostgresDatabase
-from src.infrastructure.unit_of_work.unit_of_work_factory import UnitOfWorkSingletonFactory
+from src.infrastructure.unit_of_work.unit_of_work_factory import (
+    UnitOfWorkSingletonFactory,
+)
 from src.presetntation.http.routes.root import get_root_router
 
 

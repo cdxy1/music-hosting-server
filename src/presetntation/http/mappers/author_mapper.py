@@ -6,7 +6,7 @@ from src.presetntation.http.schemas.author import (
 
 
 def pydantic_to_dto(input: CreateAuthorRequest) -> AuthorDTO:
-    ...
+    return AuthorDTO(**input.model_dump())
 
 def dto_to_pydantic(output: AuthorDTO) -> CreateAuthorResponse:
-    ...
+    return CreateAuthorResponse(id=output.id)

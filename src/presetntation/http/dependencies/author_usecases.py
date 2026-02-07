@@ -1,6 +1,8 @@
 from src.application.usecases.create_author_usecase import CreateAuthorUsecase
 from src.infrastructure.repository.author_repository_impl import AuthorRepository
-from src.infrastructure.unit_of_work.unit_of_work_factory import UnitOfWorkSingletonFactory
+from src.infrastructure.unit_of_work.unit_of_work_factory import (
+    UnitOfWorkSingletonFactory,
+)
 
 
 def get_create_author_usecase():

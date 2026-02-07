@@ -1,6 +1,7 @@
 from src.infrastructure.database.contract import IDatabase
 from src.infrastructure.unit_of_work.unit_of_work_impl import UnitOfWork
 
+
 class UnitOfWorkSingletonFactory:
     _instance = None
     _initialized = False
