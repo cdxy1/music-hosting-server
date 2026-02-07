@@ -2,12 +2,16 @@ from uuid import UUID
 
 from pydantic import BaseModel
 
+from src.domain.enums.author_type import AuthorType
 
-class CreateAuthorRequest(BaseModel):
+
+class CreateAuthorBase(BaseModel):
+   class Config:
+       use_enum_values = True
+
+class CreateAuthorRequest(CreateAuthorBase):
     name: str
-    type: str
+    type: AuthorType
     
-class CreateAuthorResponse(BaseModel):
+class CreateAuthorResponse(CreateAuthorBase):
     id: UUID
-    name: str
-    type: str
