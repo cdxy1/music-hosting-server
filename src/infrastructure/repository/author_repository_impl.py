@@ -1,3 +1,6 @@
+from uuid import UUID
+
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.application.repository.contract import IRepository
@@ -15,13 +18,27 @@ class AuthorRepository(IRepository):
         
         session.add(author_orm_model)
         
-    def get_by_id(self, session: AsyncSession):
-        ...
-
+    async def get_by_id(self, session: AsyncSession, author_id: UUID) -> Author:
+        stmt = (select(AuthorModel)
+                .where(AuthorModel.author_id == author_id))
+        
+        result = await session.execute(stmt)
+        author_from_db = result.scalar()
+        
+        
+        return Author(
+            name=author_from_db.name,
+            type=author_from_db.type,
+            id=author_from_db.author_id,
+        )
+        
     async def get_all(self, session: AsyncSession):
         ...
 
     async def delete(self, session: AsyncSession):
+        ...
+        
+    async def update(self, session: AsyncSession):
         ...
         
     async def exists(self, session: AsyncSession):
