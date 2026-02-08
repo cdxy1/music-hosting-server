@@ -25,15 +25,21 @@ class AuthorRepository(IRepository):
         result = await session.execute(stmt)
         author_from_db = result.scalar()
         
-        
         return Author(
             name=author_from_db.name,
             type=author_from_db.type,
             id=author_from_db.author_id,
         )
         
-    async def get_all(self, session: AsyncSession):
-        ...
+    async def get_all(self, session: AsyncSession) -> tuple[Author]:
+        stmt = select(AuthorModel)
+        
+        result = await session.execute(stmt)
+        authors_from_db = result.scalars().all()
+        
+        authors = tuple(Author(id=author.author_id, name=author.name, type=author.type) for author in authors_from_db)
+                
+        return authors
 
     async def delete(self, session: AsyncSession):
         ...
