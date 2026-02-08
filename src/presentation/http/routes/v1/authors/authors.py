@@ -1,11 +1,15 @@
+from uuid import UUID
+
 from fastapi import APIRouter, Depends
 
 from src.application.usecases.create_author_usecase import CreateAuthorUsecase
 from src.presentation.http.dependencies.author_usecases import (
+    get_author_usecase,
     get_create_author_usecase,
 )
 from src.presentation.http.mappers.author_mapper import (
-    dto_to_pydantic,
+    dto_to_create_author_pydantic,
+    dto_to_get_author_pydantic,
     pydantic_to_dto,
 )
 from src.presentation.http.schemas.author import (
@@ -19,7 +23,7 @@ router = APIRouter(prefix="/authors", tags=["authors"])
 async def create_author(author: CreateAuthorRequest, usecase: CreateAuthorUsecase = Depends(get_create_author_usecase)) -> CreateAuthorResponse:
     input_data = pydantic_to_dto(author)
     author_dto = await usecase(input_data)
-    response = dto_to_pydantic(author_dto)
+    response = dto_to_create_author_pydantic(author_dto)
     
     return response
     
@@ -28,5 +32,8 @@ async def get_authors():
     ...
 
 @router.get("/{author_id}")
-async def get_author():
-    ...
+async def get_author(author_id: UUID, usecase: CreateAuthorUsecase = Depends(get_author_usecase)):
+    author_dto = await usecase(author_id)
+    response = dto_to_get_author_pydantic(author_dto)
+    
+    return response
