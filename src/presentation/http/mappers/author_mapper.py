@@ -1,5 +1,5 @@
 from src.application.dto.author_dto import AuthorDTO
-from src.presetntation.http.schemas.author import (
+from src.presentation.http.schemas.author import (
     CreateAuthorRequest,
     CreateAuthorResponse,
 )

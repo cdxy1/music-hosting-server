@@ -1,14 +1,14 @@
 from fastapi import APIRouter, Depends
 
 from src.application.usecases.create_author_usecase import CreateAuthorUsecase
-from src.presetntation.http.dependencies.author_usecases import (
+from src.presentation.http.dependencies.author_usecases import (
     get_create_author_usecase,
 )
-from src.presetntation.http.mappers.author_mapper import (
+from src.presentation.http.mappers.author_mapper import (
     dto_to_pydantic,
     pydantic_to_dto,
 )
-from src.presetntation.http.schemas.author import (
+from src.presentation.http.schemas.author import (
     CreateAuthorRequest,
     CreateAuthorResponse,
 )

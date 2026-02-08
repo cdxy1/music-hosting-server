@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from src.presetntation.http.routes.v1.authors.authors import router as author_router
+from src.presentation.http.routes.v1.authors.authors import router as author_router
 
 INTERNAL_ROUTERS = (author_router,)
 
