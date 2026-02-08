@@ -14,3 +14,15 @@ class AuthorRepository(IRepository):
         )
         
         session.add(author_orm_model)
+        
+    def get_by_id(self, session: AsyncSession):
+        ...
+
+    async def get_all(self, session: AsyncSession):
+        ...
+
+    async def delete(self, session: AsyncSession):
+        ...
+        
+    async def exists(self, session: AsyncSession):
+        ...
