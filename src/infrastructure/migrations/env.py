@@ -1,12 +1,13 @@
+import asyncio
 from logging.config import fileConfig
 
-from sqlalchemy import create_engine
+from sqlalchemy.engine import Connection
+from sqlalchemy.ext.asyncio import create_async_engine
 
 from alembic import context
 
 from src.infrastructure.models.base import BaseOrmModel
 from src.infrastructure.config.postgres import PostgresConfig
-
 # IDK why alemic can't map models by base model
 from src.infrastructure.models.author import AuthorModel #NOQA
 
@@ -43,7 +44,7 @@ def run_migrations_offline() -> None:
     script output.
 
     """
-    url = PostgresConfig.database_uri
+    url = PostgresConfig().database_uri
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -55,23 +56,31 @@ def run_migrations_offline() -> None:
         context.run_migrations()
 
 
-def run_migrations_online() -> None:
-    """Run migrations in 'online' mode.
+def do_run_migrations(connection: Connection) -> None:
+    context.configure(connection=connection, target_metadata=target_metadata)
 
-    In this scenario we need to create an Engine
+    with context.begin_transaction():
+        context.run_migrations()
+
+
+async def run_async_migrations() -> None:
+    """In this scenario we need to create an Engine
     and associate a connection with the context.
 
     """
 
-    connectable = create_engine(PostgresConfig().migration_database_uri)
+    connectable = create_async_engine(PostgresConfig().database_uri)
 
-    with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+    async with connectable.connect() as connection:
+        await connection.run_sync(do_run_migrations)
 
-        with context.begin_transaction():
-            context.run_migrations()
+    await connectable.dispose()
+
+
+def run_migrations_online() -> None:
+    """Run migrations in 'online' mode."""
+
+    asyncio.run(run_async_migrations())
 
 
 if context.is_offline_mode():
