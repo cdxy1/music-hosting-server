@@ -1,15 +1,15 @@
 import asyncio
 from logging.config import fileConfig
 
+from alembic import context
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import create_async_engine
 
-from alembic import context
-
-from src.infrastructure.models.base import BaseOrmModel
 from src.infrastructure.config.postgres import PostgresConfig
+
 # IDK why alemic can't map models by base model
-from src.infrastructure.models.author import AuthorModel #NOQA
+from src.infrastructure.models.author import AuthorModel  #NOQA
+from src.infrastructure.models.base import BaseOrmModel
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
