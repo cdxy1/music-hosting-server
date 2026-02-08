@@ -6,9 +6,9 @@ from src.domain.enums.author_type import AuthorType
 
 @dataclass(frozen=True, slots=True)
 class Author:
-    id: UUID = field(init=False, default_factory=uuid4)
     name: str
     type: AuthorType
+    id: UUID = field(default_factory=uuid4)
 
     def __post_init__(self):
         self._ensure_id_is_uuid()

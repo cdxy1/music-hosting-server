@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from typing import Optional
 from uuid import UUID
 
@@ -10,3 +10,6 @@ class AuthorDTO:
     name: str
     type: AuthorType
     id: Optional[UUID] = None
+    
+    def to_dict(self):
+        return asdict(self)
