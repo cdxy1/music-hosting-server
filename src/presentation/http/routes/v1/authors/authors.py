@@ -42,3 +42,7 @@ async def get_author(author_id: UUID, usecase: CreateAuthorUsecase = Depends(get
     response = dto_to_get_author_pydantic(author_dto)
     
     return response
+
+@router.delete("/{author_id}")
+async def delete_author(author_id: UUID):
+    ...
