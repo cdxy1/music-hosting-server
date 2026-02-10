@@ -92,3 +92,4 @@ venv/
 .github/
 LICENSE
 *.md
+Makefile
