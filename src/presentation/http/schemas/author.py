@@ -21,3 +21,6 @@ class GetAuthorResponse(AuthorBase):
     id: UUID
     name: str
     type: AuthorType
+
+class DeleteAuthorResponse(AuthorBase):
+    id: UUID

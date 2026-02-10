@@ -7,10 +7,12 @@ from src.presentation.http.dependencies.author_usecases import (
     get_all_authors_usecase,
     get_author_usecase,
     get_create_author_usecase,
+    get_delete_author_usecase,
 )
 from src.presentation.http.mappers.author_mapper import (
     dto_to_create_author_pydantic,
     dto_to_get_all_author_pydantic,
+    dto_to_delete_author_pydantic,
     dto_to_get_author_pydantic,
     pydantic_to_dto,
 )
@@ -44,5 +46,8 @@ async def get_author(author_id: UUID, usecase: CreateAuthorUsecase = Depends(get
     return response
 
 @router.delete("/{author_id}")
-async def delete_author(author_id: UUID):
-    ...
+async def delete_author(author_id: UUID, usecase = Depends(get_delete_author_usecase)):
+    author_uuid = await usecase(author_id)
+    response = dto_to_delete_author_pydantic(author_uuid)
+    
+    return response

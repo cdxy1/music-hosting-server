@@ -1,8 +1,11 @@
+from uuid import UUID
+
 from src.application.dto.author_dto import AuthorDTO
 from src.presentation.http.schemas.author import (
     CreateAuthorRequest,
     CreateAuthorResponse,
     GetAuthorResponse,
+    DeleteAuthorResponse
 )
 
 
@@ -17,3 +20,6 @@ def dto_to_get_author_pydantic(output: AuthorDTO) -> CreateAuthorResponse:
 
 def dto_to_get_all_author_pydantic(output: tuple[AuthorDTO]) -> tuple[CreateAuthorResponse]:
     return tuple(GetAuthorResponse(**dto.to_dict()) for dto in output)
+
+def dto_to_delete_author_pydantic(output: UUID) -> DeleteAuthorResponse:
+    return DeleteAuthorResponse(id=output)
