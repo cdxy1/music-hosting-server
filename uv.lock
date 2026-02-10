@@ -273,6 +273,7 @@ dependencies = [
     { name = "asyncpg" },
     { name = "fastapi" },
     { name = "sqlalchemy" },
+    { name = "uvicorn" },
 ]
 
 [package.dev-dependencies]
@@ -280,7 +281,6 @@ dev = [
     { name = "pytest" },
     { name = "python-dotenv" },
     { name = "ruff" },
-    { name = "uvicorn" },
 ]
 
 [package.metadata]
@@ -289,6 +289,7 @@ requires-dist = [
     { name = "asyncpg", specifier = ">=0.31.0" },
     { name = "fastapi", extras = ["standart"], specifier = ">=0.128.0" },
     { name = "sqlalchemy", specifier = ">=2.0.46" },
+    { name = "uvicorn", specifier = ">=0.40.0" },
 ]
 
 [package.metadata.requires-dev]
@@ -296,7 +297,6 @@ dev = [
     { name = "pytest", specifier = ">=9.0.2" },
     { name = "python-dotenv", specifier = ">=1.2.1" },
     { name = "ruff", specifier = ">=0.14.14" },
-    { name = "uvicorn", specifier = ">=0.40.0" },
 ]
 
 [[package]]
