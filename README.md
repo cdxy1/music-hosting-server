@@ -1,3 +1,8 @@
+<div align="right">
+  
+[![NO AI](https://raw.githubusercontent.com/nuxy/no-ai-badge/master/badge.svg)](https://github.com/nuxy/no-ai-badge)
+</div>
+
 <div align="center">
 
 # It's a long way..
