@@ -32,4 +32,4 @@ USER nonroot
 
 WORKDIR /app
 
-CMD []
+CMD ["python3", "-m", "src.setup.bootstrap"]

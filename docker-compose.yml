@@ -1,4 +1,20 @@
 services:
+  music_server:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+    environment:
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_HOST: postgres
+      DB_PORT: ${DB_PORT}
+      APP_ENV: prod
+
   postgres:
     image: postgres:15
     container_name: my-postgres
