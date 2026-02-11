@@ -6,7 +6,7 @@ from src.domain.entities.genre import Genre
 from src.domain.value_objects.audio import Audio
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class Track:
     id: UUID
     title: str
