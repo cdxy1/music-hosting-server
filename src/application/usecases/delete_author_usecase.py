@@ -1,5 +1,5 @@
-from uuid import UUID
 from typing import Callable
+from uuid import UUID
 
 from src.application.repository.contract import IRepository
 from src.application.unit_of_work.contract import IUnitOfWork

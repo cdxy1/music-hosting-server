@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from uuid import UUID
 
-from src.domain.entities.audio import Audio
 from src.domain.entities.author import Author
 from src.domain.entities.genre import Genre
+from src.domain.value_objects.audio import Audio
 
 
 @dataclass(frozen=True)

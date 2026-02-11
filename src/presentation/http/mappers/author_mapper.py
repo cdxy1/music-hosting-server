@@ -4,8 +4,8 @@ from src.application.dto.author_dto import AuthorDTO
 from src.presentation.http.schemas.author import (
     CreateAuthorRequest,
     CreateAuthorResponse,
+    DeleteAuthorResponse,
     GetAuthorResponse,
-    DeleteAuthorResponse
 )
 
 

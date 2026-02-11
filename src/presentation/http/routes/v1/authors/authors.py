@@ -11,8 +11,8 @@ from src.presentation.http.dependencies.author_usecases import (
 )
 from src.presentation.http.mappers.author_mapper import (
     dto_to_create_author_pydantic,
-    dto_to_get_all_author_pydantic,
     dto_to_delete_author_pydantic,
+    dto_to_get_all_author_pydantic,
     dto_to_get_author_pydantic,
     pydantic_to_dto,
 )
