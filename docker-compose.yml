@@ -51,6 +51,7 @@ services:
       USE_SSL: false
     volumes:
       - minio_data:/data
+    command: server --console-address ":9001" /data
     ports:
       - "9000:9000"
       - "9001:9001"
