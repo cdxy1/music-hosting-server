@@ -19,6 +19,3 @@ class IRepository(ABC):
 
     @abstractmethod
     async def delete(self) -> bool: ...
-
-    @abstractmethod
-    async def exists(self) -> bool: ...
