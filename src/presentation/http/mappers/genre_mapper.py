@@ -12,5 +12,8 @@ def pydantic_to_dto(input: CreateGenreRequest) -> GenreDTO:
 def dto_to_pydantic(output: GenreDTO):
     return CreateGenreResponse(**output.to_dict())
 
-def dto_to_get_all_genres_pydantic(output: tuple[GenreDTO]) -> tuple[CreateGenreResponse]:
+def dto_to_get_all_genres_pydantic(output: tuple[GenreDTO]) -> tuple[GetGenresResponse]:
     return tuple(GetGenresResponse(**dto.to_dict()) for dto in output)
+
+def dto_to_get_genre_pydantic(output: GenreDTO) -> GetGenresResponse:
+    return GetGenresResponse(**output.to_dict())
