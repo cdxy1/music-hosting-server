@@ -2,7 +2,7 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends
 
-from src.application.usecases.create_author_usecase import CreateAuthorUsecase
+from src.application.usecases.author.create_author_usecase import CreateAuthorUsecase #TODO: Надо сделать нормальную типизацию или ее убрать
 from src.presentation.http.dependencies.author_usecases import (
     get_all_authors_usecase,
     get_author_usecase,
