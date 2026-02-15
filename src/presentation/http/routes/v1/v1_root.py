@@ -1,8 +1,9 @@
 from fastapi import APIRouter
 
 from src.presentation.http.routes.v1.authors.authors import router as author_router
+from src.presentation.http.routes.v1.genre.genre import router as genre_router
 
-INTERNAL_ROUTERS = (author_router,)
+INTERNAL_ROUTERS = (author_router, genre_router)
 
 def get_root_v1_router():
     router = APIRouter(prefix="/v1")
