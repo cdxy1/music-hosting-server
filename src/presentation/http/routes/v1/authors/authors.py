@@ -2,9 +2,6 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends
 
-from src.application.usecases.author.create_author_usecase import (
-    CreateAuthorUsecase,  #TODO: Надо сделать нормальную типизацию или ее убрать
-)
 from src.presentation.http.dependencies.author_usecases import (
     get_all_authors_usecase,
     get_author_usecase,
@@ -26,7 +23,7 @@ from src.presentation.http.schemas.author import (
 router = APIRouter(prefix="/authors", tags=["authors"])
 
 @router.post("/")
-async def create_author(author: CreateAuthorRequest, usecase: CreateAuthorUsecase = Depends(get_create_author_usecase)) -> CreateAuthorResponse:
+async def create_author(author: CreateAuthorRequest, usecase = Depends(get_create_author_usecase)) -> CreateAuthorResponse:
     input_data = pydantic_to_dto(author)
     author_dto = await usecase(input_data)
     response = dto_to_create_author_pydantic(author_dto)
@@ -34,14 +31,14 @@ async def create_author(author: CreateAuthorRequest, usecase: CreateAuthorUsecas
     return response
     
 @router.get("/")
-async def get_authors(usecase: CreateAuthorUsecase = Depends(get_all_authors_usecase)):
+async def get_authors(usecase = Depends(get_all_authors_usecase)):
     authors_dto = await usecase()
     response = dto_to_get_all_authors_pydantic(authors_dto)
     
     return response
 
 @router.get("/{author_id}")
-async def get_author(author_id: UUID, usecase: CreateAuthorUsecase = Depends(get_author_usecase)):
+async def get_author(author_id: UUID, usecase = Depends(get_author_usecase)):
     author_dto = await usecase(author_id)
     response = dto_to_get_author_pydantic(author_dto)
     
