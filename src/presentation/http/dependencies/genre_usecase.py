@@ -1,6 +1,9 @@
-from src.infrastructure.repository.genre_repository_impl import GenreRepository
-from src.infrastructure.unit_of_work.unit_of_work_factory import UnitOfWorkSingletonFactory
 from src.application.usecases.genre.create_genre_usecase import CreateGenreUsecase
+from src.infrastructure.repository.genre_repository_impl import GenreRepository
+from src.infrastructure.unit_of_work.unit_of_work_factory import (
+    UnitOfWorkSingletonFactory,
+)
+
 
 def get_create_genre_usecase():
     uow = UnitOfWorkSingletonFactory().create_uow_instance
