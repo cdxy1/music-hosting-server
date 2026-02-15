@@ -1,7 +1,14 @@
 from fastapi import APIRouter, Depends
 
-from src.presentation.http.dependencies.genre_usecase import get_create_genre_usecase, get_all_genre_usecase
-from src.presentation.http.mappers.genre_mapper import pydantic_to_dto, dto_to_pydantic, dto_to_get_all_genres_pydantic
+from src.presentation.http.dependencies.genre_usecase import (
+    get_all_genre_usecase,
+    get_create_genre_usecase,
+)
+from src.presentation.http.mappers.genre_mapper import (
+    dto_to_get_all_genres_pydantic,
+    dto_to_pydantic,
+    pydantic_to_dto,
+)
 from src.presentation.http.schemas.genre import CreateGenreRequest
 
 router = APIRouter(prefix="/genres", tags=["genres"])

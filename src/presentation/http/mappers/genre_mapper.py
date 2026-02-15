@@ -1,5 +1,9 @@
 from src.application.dto.genre_dto import GenreDTO
-from src.presentation.http.schemas.genre import CreateGenreRequest, CreateGenreResponse, GetGenresResponse
+from src.presentation.http.schemas.genre import (
+    CreateGenreRequest,
+    CreateGenreResponse,
+    GetGenresResponse,
+)
 
 
 def pydantic_to_dto(input: CreateGenreRequest) -> GenreDTO:
