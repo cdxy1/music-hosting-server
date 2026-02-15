@@ -14,7 +14,7 @@ from src.presentation.http.dependencies.author_usecases import (
 from src.presentation.http.mappers.author_mapper import (
     dto_to_create_author_pydantic,
     dto_to_delete_author_pydantic,
-    dto_to_get_all_author_pydantic,
+    dto_to_get_all_authors_pydantic,
     dto_to_get_author_pydantic,
     pydantic_to_dto,
 )
@@ -36,7 +36,7 @@ async def create_author(author: CreateAuthorRequest, usecase: CreateAuthorUsecas
 @router.get("/")
 async def get_authors(usecase: CreateAuthorUsecase = Depends(get_all_authors_usecase)):
     authors_dto = await usecase()
-    response = dto_to_get_all_author_pydantic(authors_dto)
+    response = dto_to_get_all_authors_pydantic(authors_dto)
     
     return response
 

@@ -18,7 +18,7 @@ def dto_to_create_author_pydantic(output: AuthorDTO) -> CreateAuthorResponse:
 def dto_to_get_author_pydantic(output: AuthorDTO) -> CreateAuthorResponse:
     return GetAuthorResponse(**output.to_dict())
 
-def dto_to_get_all_author_pydantic(output: tuple[AuthorDTO]) -> tuple[CreateAuthorResponse]:
+def dto_to_get_all_authors_pydantic(output: tuple[AuthorDTO]) -> tuple[CreateAuthorResponse]:
     return tuple(GetAuthorResponse(**dto.to_dict()) for dto in output)
 
 def dto_to_delete_author_pydantic(output: UUID) -> DeleteAuthorResponse:
