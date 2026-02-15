@@ -45,12 +45,7 @@ class AuthorRepository(IRepository):
         stmt = (delete(AuthorModel).
                 where(AuthorModel.author_id == author_id))
         
-        await session.execute(stmt)
-        
-        
+        await session.execute(stmt)  
         
     async def update(self, session: AsyncSession):
-        ...
-        
-    async def exists(self, session: AsyncSession):
         ...
