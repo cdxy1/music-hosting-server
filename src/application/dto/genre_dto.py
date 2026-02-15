@@ -1,6 +1,7 @@
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 from typing import Optional
 from uuid import UUID
+
 
 @dataclass(frozen=True, slots=True)
 class GenreDTO:

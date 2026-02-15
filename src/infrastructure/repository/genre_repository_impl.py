@@ -7,6 +7,7 @@ from src.application.repository.contract import IRepository
 from src.domain.entities.genre import Genre
 from src.infrastructure.models.genre import GenreModel
 
+
 class GenreRepository(IRepository):
     def create(self, session: AsyncSession, genre: Genre):
         genre_orm_model = GenreModel(
