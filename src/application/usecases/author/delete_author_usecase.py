@@ -1,16 +1,9 @@
-from typing import Callable
 from uuid import UUID
 
-from src.application.repository.contract import IRepository
-from src.application.unit_of_work.contract import IUnitOfWork
+from src.application.usecases.base import BaseUsecase
 
 
-class DeleteAuthorUsecase:
-    
-    def __init__(self, repo: IRepository, uow_factory: Callable[[], IUnitOfWork]):
-        self.repo = repo
-        self.uow_factory = uow_factory     
-
+class DeleteAuthorUsecase(BaseUsecase):
     async def __call__(self, author_id: UUID):
         uow = self.uow_factory()
         async with uow() as session:

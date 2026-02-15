@@ -1,16 +1,8 @@
-from typing import Callable
-
 from src.application.dto.author_dto import AuthorDTO
-from src.application.repository.contract import IRepository
-from src.application.unit_of_work.contract import IUnitOfWork
+from src.application.usecases.base import BaseUsecase
 
 
-class GetAllAuthorUsecase:
-    
-    def __init__(self, repo: IRepository, uow_factory: Callable[[], IUnitOfWork]):
-        self.repo = repo
-        self.uow_factory = uow_factory     
-
+class GetAllAuthorUsecase(BaseUsecase):  
     async def __call__(self):
         uow = self.uow_factory()
         async with uow() as session:
