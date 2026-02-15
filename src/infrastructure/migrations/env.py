@@ -9,6 +9,7 @@ from src.infrastructure.config.postgres import PostgresConfig
 
 # IDK why alemic can't map models by base model
 from src.infrastructure.models.author import AuthorModel  #NOQA
+from src.infrastructure.models.genre import GenreModel #NOQA
 from src.infrastructure.models.base import BaseOrmModel
 
 # this is the Alembic Config object, which provides
