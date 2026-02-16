@@ -13,5 +13,5 @@ class Release:
     author: Author
     genre: Genre
     tracks: list[Track]
-    release_data: datetime = field(default_factory=datetime.now)
+    release_data: datetime
     id: UUID = field(default_factory=uuid4) 
