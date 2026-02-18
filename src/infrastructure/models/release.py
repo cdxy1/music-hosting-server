@@ -12,11 +12,10 @@ class ReleaseModel(BaseOrmModel):
     
     release_id: Mapped[UUID] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(nullable=False)
-    author: Mapped[UUID] = mapped_column(ForeignKey(
-        "author.author_id"
-        ))
-    genre: Mapped[UUID] = mapped_column(ForeignKey(
-        "genre.genre_id"
-    ))
+    author_fk: Mapped[UUID] = mapped_column(ForeignKey("author.author_id"))
+    genre_fk: Mapped[UUID] = mapped_column(ForeignKey("genre.genre_id"))
     realease_data: Mapped[datetime]
+    
+    author = relationship("AuthorModel", back_populates="release", uselist=False, lazy="joined")
+    genre = relationship("GenreModel", back_populates="release", uselist=False, lazy="joined")
     
