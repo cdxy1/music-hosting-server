@@ -55,6 +55,13 @@ services:
     ports:
       - "9000:9000"
       - "9001:9001"
+    
+  redis:
+    image: redis:alpine
+    container_name: redis_fastapi
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
 
 volumes:
   pgdata:
