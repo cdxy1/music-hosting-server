@@ -5,6 +5,7 @@ from pydantic import BaseModel
 
 from src.domain.enums.release_type import ReleaseType
 
+
 class CreateReleaseRequest(BaseModel):
     name: str
     author_id: UUID

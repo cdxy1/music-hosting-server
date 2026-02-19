@@ -1,6 +1,6 @@
-from uuid import UUID
-from typing import Optional
 from dataclasses import dataclass
+from typing import Optional
+from uuid import UUID
 
 from src.application.dto.base_dto import BaseDTO
 

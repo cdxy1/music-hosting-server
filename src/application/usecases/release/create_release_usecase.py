@@ -1,12 +1,12 @@
 from typing import Callable
 
+from src.application.dto.release_dto import ReleaseInputDTO, ReleaseOutputDTO
 from src.application.repository.contract import IRepository
 from src.application.unit_of_work.contract import IUnitOfWork
-from src.application.dto.release_dto import ReleaseInputDTO, ReleaseOutputDTO
 from src.application.usecases.base import BaseUsecase
-from src.domain.entities.release import Release
-from src.domain.entities.genre import Genre
 from src.domain.entities.author import Author
+from src.domain.entities.genre import Genre
+from src.domain.entities.release import Release
 
 
 class CreateReleaseUsecase(BaseUsecase):

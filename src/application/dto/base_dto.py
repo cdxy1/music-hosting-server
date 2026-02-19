@@ -1,5 +1,6 @@
 from dataclasses import asdict, dataclass
 
+
 @dataclass(frozen=True, slots=True)
 class BaseDTO:
     

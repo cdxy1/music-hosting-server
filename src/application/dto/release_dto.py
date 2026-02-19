@@ -1,12 +1,13 @@
-from uuid import UUID
-from datetime import date
 from dataclasses import dataclass
+from datetime import date
 from typing import Optional
+from uuid import UUID
 
-from src.application.dto.base_dto import BaseDTO
 from src.application.dto.author_dto import AuthorDTO
+from src.application.dto.base_dto import BaseDTO
 from src.application.dto.genre_dto import GenreDTO
 from src.domain.enums.release_type import ReleaseType
+
 
 @dataclass(frozen=True, slots=True)
 class ReleaseOutputDTO(BaseDTO):
