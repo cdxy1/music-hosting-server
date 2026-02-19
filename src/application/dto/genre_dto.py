@@ -1,12 +1,11 @@
-from dataclasses import asdict, dataclass
-from typing import Optional
 from uuid import UUID
+from typing import Optional
+from dataclasses import dataclass
+
+from src.application.dto.base_dto import BaseDTO
 
 
 @dataclass(frozen=True, slots=True)
-class GenreDTO:
+class GenreDTO(BaseDTO):
     title: str
     id: Optional[UUID] = None
-    
-    def to_dict(self):
-        return asdict(self)
