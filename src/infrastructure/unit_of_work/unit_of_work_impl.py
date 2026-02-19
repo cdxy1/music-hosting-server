@@ -2,7 +2,7 @@
 from contextlib import asynccontextmanager
 
 from src.application.unit_of_work.contract import IUnitOfWork
-from src.infrastructure.database.contract import IDatabase
+from src.infrastructure.database.postgres.contract import IDatabase
 
 
 class UnitOfWork(IUnitOfWork):

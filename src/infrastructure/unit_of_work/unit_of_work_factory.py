@@ -1,4 +1,4 @@
-from src.infrastructure.database.contract import IDatabase
+from src.infrastructure.database.postgres.contract import IDatabase
 from src.infrastructure.unit_of_work.unit_of_work_impl import UnitOfWork
 
 

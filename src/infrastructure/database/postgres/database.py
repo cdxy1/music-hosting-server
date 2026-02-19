@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import (
 )
 
 from src.infrastructure.config.contract import IDatabaseConfig
-from src.infrastructure.database.contract import IDatabase
+from src.infrastructure.database.postgres.contract import IDatabase
 from src.infrastructure.models.base import BaseOrmModel
 
 

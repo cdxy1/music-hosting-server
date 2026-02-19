@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from src.infrastructure.config.postgres import PostgresConfig
-from src.infrastructure.database.postgres import PostgresDatabase
+from src.infrastructure.database.postgres.database import PostgresDatabase
 from src.infrastructure.unit_of_work.unit_of_work_factory import (
     UnitOfWorkSingletonFactory,
 )
