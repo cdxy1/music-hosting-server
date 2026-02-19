@@ -12,4 +12,4 @@ class AuthorModel(BaseOrmModel):
     name: Mapped[str] = mapped_column(nullable=False, unique=True)
     type: Mapped[str] = mapped_column(nullable=False)
     
-    release = relationship("ReleaseModel", back_populates="author", uselist=True, lazy="joined")
+    release = relationship("ReleaseModel", back_populates="author", uselist=True, lazy="selectin")

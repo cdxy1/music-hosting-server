@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date
 from uuid import UUID
 
 from sqlalchemy import ForeignKey
@@ -14,8 +14,9 @@ class ReleaseModel(BaseOrmModel):
     name: Mapped[str] = mapped_column(nullable=False)
     author_fk: Mapped[UUID] = mapped_column(ForeignKey("author.author_id"))
     genre_fk: Mapped[UUID] = mapped_column(ForeignKey("genre.genre_id"))
-    realease_data: Mapped[datetime]
+    release_date: Mapped[date] = mapped_column( nullable=False)
+    release_type: Mapped[str] = mapped_column(nullable=False)
     
     author = relationship("AuthorModel", back_populates="release", uselist=False, lazy="joined")
-    genre = relationship("GenreModel", back_populates="release", uselist=False, lazy="joined")
+    genre = relationship("GenreModel", back_populates="release", uselist=False, lazy="selectin")
     

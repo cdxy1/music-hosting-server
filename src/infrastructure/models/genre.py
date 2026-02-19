@@ -11,4 +11,4 @@ class GenreModel(BaseOrmModel):
     genre_id: Mapped[UUID] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(nullable=False, unique=True)
     
-    release = relationship("ReleaseModel", back_populates="genre", uselist=True, lazy="joined")
+    release = relationship("ReleaseModel", back_populates="genre", uselist=True, lazy="selectin")
