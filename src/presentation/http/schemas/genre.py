@@ -13,6 +13,6 @@ class CreateGenreRequest(GenreBase):
 class CreateGenreResponse(GenreBase):
     id: UUID
 
-class GetGenresResponse(GenreBase):
+class GetGenreResponse(GenreBase):
     id: UUID
     title: str
