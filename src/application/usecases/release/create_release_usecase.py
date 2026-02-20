@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, override
 
 from src.application.dto.release_dto import ReleaseInputDTO, ReleaseOutputDTO
 from src.application.repository.contract import IRepository
@@ -10,6 +10,7 @@ from src.domain.entities.release import Release
 
 
 class CreateReleaseUsecase(BaseUsecase):
+    @override
     def __init__(self, release_repo: IRepository, author_repo: IRepository, genre_repo: IRepository, uow_factory: Callable[[], IUnitOfWork]):
         self.release_repo = release_repo
         self.author_repo = author_repo
@@ -28,4 +29,4 @@ class CreateReleaseUsecase(BaseUsecase):
             release = Release(name=release_dto.name, author=author, genre=genre, release_type=release_dto.release_type, release_date=release_dto.release_date)
             self.release_repo.create(session, release)
             
-            return ReleaseOutputDTO(id=release.id, name=release.name, author=release.author, genre=release.genre, release_date=release.release_date, release_type=release.release_type)
+            return ReleaseOutputDTO(**release.to_dict())
