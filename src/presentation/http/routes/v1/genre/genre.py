@@ -7,14 +7,16 @@ from src.presentation.http.dependencies.genre_usecase import (
     get_create_genre_usecase,
     get_delete_usecase,
     get_genre_usecase,
+    get_update_usecase,
 )
 from src.presentation.http.mappers.genre_mapper import (
     dto_to_get_all_genres_pydantic,
     dto_to_get_genre_pydantic,
     dto_to_pydantic,
     pydantic_to_dto,
+    update_pydantic_to_dto,
 )
-from src.presentation.http.schemas.genre import CreateGenreRequest
+from src.presentation.http.schemas.genre import CreateGenreRequest, UpdateGenreRequest
 
 router = APIRouter(prefix="/genres", tags=["genres"])
 
@@ -44,4 +46,11 @@ async def get_genre(genre_id: UUID, usecase=Depends(get_genre_usecase)):
 async def delete_genre(genre_id: UUID, usecase=Depends(get_delete_usecase)):
     response = await usecase(genre_id)
         
-    return response    
+    return response
+
+@router.patch("/{genre_id}")
+async def update_genre(genre_id: UUID, data_to_update: UpdateGenreRequest, usecase=Depends(get_update_usecase)):
+    update_genre_dto = update_pydantic_to_dto(data_to_update)
+    response = await usecase(genre_id, update_genre_dto)
+    
+    return response

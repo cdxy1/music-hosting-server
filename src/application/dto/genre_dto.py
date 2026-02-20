@@ -9,3 +9,7 @@ from src.application.dto.base_dto import BaseDTO
 class GenreDTO(BaseDTO):
     title: str
     id: Optional[UUID] = None
+
+@dataclass(frozen=True, slots=True)
+class UpdateGenreDTO(BaseDTO):
+    title: Optional[str] = None

@@ -1,13 +1,17 @@
-from src.application.dto.genre_dto import GenreDTO
+from src.application.dto.genre_dto import GenreDTO, UpdateGenreDTO
 from src.presentation.http.schemas.genre import (
     CreateGenreRequest,
     CreateGenreResponse,
     GetGenreResponse,
+    UpdateGenreRequest,
 )
 
 
 def pydantic_to_dto(input: CreateGenreRequest) -> GenreDTO:
     return GenreDTO(**input.model_dump())
+
+def update_pydantic_to_dto(input: UpdateGenreRequest):
+    return UpdateGenreDTO(**input.model_dump())
 
 def dto_to_pydantic(output: GenreDTO):
     return CreateGenreResponse(**output.to_dict())

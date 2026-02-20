@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from sqlalchemy import delete, select
+from sqlalchemy import delete, select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.application.repository.contract import IRepository
@@ -45,5 +45,9 @@ class GenreRepository(IRepository):
         
         await session.execute(stmt)  
         
-    async def update(self, session: AsyncSession):
-        ...
+    async def update(self, session: AsyncSession, genre: Genre):
+        stmt = (update(GenreModel).
+                where(GenreModel.genre_id == genre.id).
+                values(title = genre.title))
+        
+        await session.execute(stmt)

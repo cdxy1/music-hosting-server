@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from typing import Optional
 from uuid import UUID, uuid4
 
 from src.domain.entities.base import BaseEntity
@@ -23,3 +24,6 @@ class Genre(BaseEntity):
 
         if not self.title.strip():
             raise ValueError("Genre title must be non-empty")
+        
+    def update(self, title: Optional[str] = None ) -> Genre:
+        return Genre(id=self.id, title=title if title else self.title)

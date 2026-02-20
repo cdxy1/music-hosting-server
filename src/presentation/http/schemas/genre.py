@@ -1,3 +1,4 @@
+from typing import Optional
 from uuid import UUID
 
 from pydantic import BaseModel
@@ -16,3 +17,6 @@ class CreateGenreResponse(GenreBase):
 class GetGenreResponse(GenreBase):
     id: UUID
     title: str
+    
+class UpdateGenreRequest(GenreBase):
+    title: Optional[str]
