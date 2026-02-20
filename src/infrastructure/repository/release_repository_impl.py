@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from sqlalchemy import select
+from sqlalchemy import select, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.application.repository.contract import IRepository
@@ -55,7 +55,10 @@ class ReleaseRepository(IRepository):
         return tuple(releases)
         
     async def delete(self, session: AsyncSession, release_id: UUID):
-        ...
+        stmt = (delete(ReleaseModel).
+                where(ReleaseModel.release_id == release_id))
+        
+        await session.execute(stmt)
         
     async def update(self, session: AsyncSession):
         ...
