@@ -1,8 +1,8 @@
 from dataclasses import dataclass, field
 from uuid import UUID, uuid4
 
-from src.domain.enums.author_type import AuthorType
 from src.domain.entities.base import BaseEntity
+from src.domain.enums.author_type import AuthorType
 
 
 @dataclass(frozen=True, slots=True)

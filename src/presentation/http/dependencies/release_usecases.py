@@ -1,6 +1,8 @@
 from src.application.usecases.release.create_release_usecase import CreateReleaseUsecase
+from src.application.usecases.release.get_all_releases_usecase import (
+    GetAllReleasesUsecase,
+)
 from src.application.usecases.release.get_release_usecase import GetReleaseUsecase
-from src.application.usecases.release.get_all_releases_usecase import GetAllReleasesUsecase
 from src.infrastructure.repository.author_repository_impl import AuthorRepository
 from src.infrastructure.repository.genre_repository_impl import GenreRepository
 from src.infrastructure.repository.release_repository_impl import ReleaseRepository

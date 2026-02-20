@@ -1,5 +1,10 @@
 from src.application.dto.release_dto import ReleaseInputDTO
-from src.presentation.http.schemas.release import CreateReleaseRequest, CreateReleaseResponse, GetReleaseResponse
+from src.presentation.http.schemas.release import (
+    CreateReleaseRequest,
+    CreateReleaseResponse,
+    GetReleaseResponse,
+)
+
 
 def pydantic_to_dto(input: CreateReleaseRequest):
     return ReleaseInputDTO(**input.model_dump())

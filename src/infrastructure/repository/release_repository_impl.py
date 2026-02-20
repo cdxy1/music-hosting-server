@@ -1,12 +1,12 @@
 from uuid import UUID
 
-from sqlalchemy import delete, select
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.application.repository.contract import IRepository
-from src.domain.entities.release import Release
 from src.domain.entities.author import Author
 from src.domain.entities.genre import Genre
+from src.domain.entities.release import Release
 from src.infrastructure.models.release import ReleaseModel
 
 
