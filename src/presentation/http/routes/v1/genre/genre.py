@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends
 from src.presentation.http.dependencies.genre_usecase import (
     get_all_genre_usecase,
     get_create_genre_usecase,
+    get_delete_usecase,
     get_genre_usecase,
 )
 from src.presentation.http.mappers.genre_mapper import (
@@ -38,3 +39,9 @@ async def get_genre(genre_id: UUID, usecase=Depends(get_genre_usecase)):
     response = dto_to_get_genre_pydantic(genre)
     
     return response
+
+@router.delete("/{genre_id}")
+async def delete_genre(genre_id: UUID, usecase=Depends(get_delete_usecase)):
+    response = await usecase(genre_id)
+        
+    return response    

@@ -26,9 +26,3 @@ class GetReleaseResponse(BaseModel):
     release_date: date
     release_type: ReleaseType
     id: Optional[UUID] = None
-
-class DeleteReleaseRequest(BaseModel):
-    id: UUID
-    
-class DeleteReleaseResponse(BaseModel):
-    id: UUID

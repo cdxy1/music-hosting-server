@@ -1,4 +1,5 @@
 from src.application.usecases.release.create_release_usecase import CreateReleaseUsecase
+from src.application.usecases.release.delete_release_usecase import DeleteReleaseUsecase
 from src.application.usecases.release.get_all_releases_usecase import (
     GetAllReleasesUsecase,
 )
@@ -34,5 +35,13 @@ def get_all_releases_usecase():
     repo = ReleaseRepository()
     
     usecase = GetAllReleasesUsecase(repo, uow)
+    
+    return usecase
+
+def get_delete_release_usecase():
+    uow = UnitOfWorkSingletonFactory().create_uow_instance
+    repo = ReleaseRepository()
+    
+    usecase = DeleteReleaseUsecase(repo, uow)
     
     return usecase

@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends
 from src.presentation.http.dependencies.release_usecases import (
     get_all_releases_usecase,
     get_create_release_usecase,
+    get_delete_release_usecase,
     get_release_usecase,
 )
 from src.presentation.http.mappers.release_mapper import (
@@ -20,19 +21,24 @@ router = APIRouter(prefix="/releases", tags=["releases"])
 async def create_release(release: CreateReleaseRequest, usecase = Depends(get_create_release_usecase)):
     input_data = pydantic_to_dto(release)
     release = await usecase(input_data)
-    output_data = dto_to_pydantic(release)
+    response = dto_to_pydantic(release)
     
-    return output_data
+    return response
 
 @router.get("/")
 async def get_all_releases(usecase = Depends(get_all_releases_usecase)):
     releases = await usecase()
-    output_data = many_dto_to_pydantic(releases)
+    response = many_dto_to_pydantic(releases)
     
-    return output_data
+    return response
 
 @router.get("/{release_id}")
 async def get_release(release_id: UUID, usecase = Depends(get_release_usecase)):
-    release = await usecase(release_id)
-    return release
+    response = await usecase(release_id)
+    return response
 
+@router.delete("/{release_id}")
+async def delete_release(release_id: UUID, usecase = Depends(get_delete_release_usecase)):
+    response = await usecase(release_id)
+
+    return response
