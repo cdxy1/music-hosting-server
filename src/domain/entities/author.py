@@ -2,10 +2,11 @@ from dataclasses import dataclass, field
 from uuid import UUID, uuid4
 
 from src.domain.enums.author_type import AuthorType
+from src.domain.entities.base import BaseEntity
 
 
 @dataclass(frozen=True, slots=True)
-class Author:
+class Author(BaseEntity):
     name: str
     type: AuthorType
     id: UUID = field(default_factory=uuid4)

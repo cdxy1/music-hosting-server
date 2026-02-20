@@ -4,10 +4,11 @@ from uuid import UUID
 from src.domain.entities.author import Author
 from src.domain.entities.genre import Genre
 from src.domain.value_objects.audio import Audio
+from src.domain.entities.base import BaseEntity
 
 
 @dataclass(frozen=True, slots=True)
-class Track:
+class Track(BaseEntity):
     id: UUID
     title: str
     genre: Genre

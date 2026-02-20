@@ -1,9 +1,11 @@
 from dataclasses import dataclass, field
 from uuid import UUID, uuid4
 
+from src.domain.entities.base import BaseEntity
+
 
 @dataclass(frozen=True, slots=True)
-class Genre:
+class Genre(BaseEntity):
     title: str
     id: UUID = field(default_factory=uuid4)
 

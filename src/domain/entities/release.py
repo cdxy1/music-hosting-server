@@ -7,10 +7,11 @@ from src.domain.entities.genre import Genre
 
 # from src.domain.entities.track import Track
 from src.domain.enums.release_type import ReleaseType
+from src.domain.entities.base import BaseEntity
 
 
 @dataclass(slots=True, frozen=True)
-class Release:
+class Release(BaseEntity):
     name: str
     author: Author
     genre: Genre
