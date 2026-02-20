@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from typing import Optional
 from uuid import UUID, uuid4
 
 from src.domain.entities.base import BaseEntity
@@ -27,3 +28,6 @@ class Author(BaseEntity):
             raise ValueError("Author name must be non-empty")
 
     def _ensure_author_type(self): ...
+    
+    def update(self, name: Optional[str] = None, type: Optional[AuthorType] = None) -> Author:
+        return Author(id=self.id, name=name if name else self.name, type=type if type else self.type)

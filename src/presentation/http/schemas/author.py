@@ -1,3 +1,4 @@
+from typing import Optional
 from uuid import UUID
 
 from pydantic import BaseModel
@@ -24,3 +25,7 @@ class GetAuthorResponse(AuthorBase):
 
 class DeleteAuthorResponse(AuthorBase):
     id: UUID
+
+class UpdateAuthorRequest(AuthorBase):
+    name: Optional[str]
+    type: Optional[AuthorType]

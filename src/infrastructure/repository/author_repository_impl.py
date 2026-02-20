@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from sqlalchemy import delete, select
+from sqlalchemy import delete, select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.application.repository.contract import IRepository
@@ -47,5 +47,9 @@ class AuthorRepository(IRepository):
         
         await session.execute(stmt)  
         
-    async def update(self, session: AsyncSession):
-        ...
+    async def update(self, session: AsyncSession, author: Author):
+        stmt = (update(AuthorModel).
+                where(AuthorModel.author_id == author.id).
+                values(name = author.name, type=author.type))
+        
+        await session.execute(stmt)

@@ -7,6 +7,7 @@ from src.presentation.http.dependencies.author_usecases import (
     get_author_usecase,
     get_create_author_usecase,
     get_delete_author_usecase,
+    get_update_author_usecase,
 )
 from src.presentation.http.mappers.author_mapper import (
     dto_to_create_author_pydantic,
@@ -14,10 +15,12 @@ from src.presentation.http.mappers.author_mapper import (
     dto_to_get_all_authors_pydantic,
     dto_to_get_author_pydantic,
     pydantic_to_dto,
+    update_pydantic_to_dto,
 )
 from src.presentation.http.schemas.author import (
     CreateAuthorRequest,
     CreateAuthorResponse,
+    UpdateAuthorRequest,
 )
 
 router = APIRouter(prefix="/authors", tags=["authors"])
@@ -48,5 +51,12 @@ async def get_author(author_id: UUID, usecase = Depends(get_author_usecase)):
 async def delete_author(author_id: UUID, usecase = Depends(get_delete_author_usecase)):
     author_uuid = await usecase(author_id)
     response = dto_to_delete_author_pydantic(author_uuid)
+    
+    return response
+
+@router.patch("/{author_id}")
+async def update_author(author_id: UUID, data_to_update: UpdateAuthorRequest, usecase = Depends(get_update_author_usecase)):
+    update_author_dto = update_pydantic_to_dto(data_to_update)
+    response = await usecase(author_id, update_author_dto)
     
     return response

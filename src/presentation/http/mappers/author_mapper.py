@@ -1,16 +1,20 @@
 from uuid import UUID
 
-from src.application.dto.author_dto import AuthorDTO
+from src.application.dto.author_dto import AuthorDTO, UpdateAuthorDTO
 from src.presentation.http.schemas.author import (
     CreateAuthorRequest,
     CreateAuthorResponse,
     DeleteAuthorResponse,
     GetAuthorResponse,
+    UpdateAuthorRequest,
 )
 
 
 def pydantic_to_dto(input: CreateAuthorRequest) -> AuthorDTO:
     return AuthorDTO(**input.model_dump())
+
+def update_pydantic_to_dto(input: UpdateAuthorRequest):
+    return UpdateAuthorDTO(**input.model_dump())
 
 def dto_to_create_author_pydantic(output: AuthorDTO) -> CreateAuthorResponse:
     return CreateAuthorResponse(**output.to_dict())

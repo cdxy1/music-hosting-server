@@ -11,3 +11,8 @@ class AuthorDTO(BaseDTO):
     name: str
     type: AuthorType
     id: Optional[UUID] = None
+    
+@dataclass(frozen=True, slots=True)
+class UpdateAuthorDTO(BaseDTO):
+    name: Optional[str] = None
+    type : Optional[AuthorType] = None
