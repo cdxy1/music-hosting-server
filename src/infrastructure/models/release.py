@@ -17,6 +17,7 @@ class ReleaseModel(BaseOrmModel):
     release_date: Mapped[date] = mapped_column( nullable=False)
     release_type: Mapped[str] = mapped_column(nullable=False)
     
-    author = relationship("AuthorModel", back_populates="release", uselist=False, lazy="joined")
+    author = relationship("AuthorModel", back_populates="release", uselist=False, lazy="selectin")
     genre = relationship("GenreModel", back_populates="release", uselist=False, lazy="selectin")
+    tracks = relationship("TrackModel", back_populates="release", uselist=True, lazy="selectin")
     
