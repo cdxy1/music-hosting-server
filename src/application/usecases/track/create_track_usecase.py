@@ -1,6 +1,6 @@
 from typing import Callable, override
 
-from src.application.dto.release_dto import ReleaseInputDTO, ReleaseOutputDTO
+from src.application.dto.track_dto import TrackInputDTO
 from src.application.repository.contract import IRepository
 from src.application.unit_of_work.contract import IUnitOfWork
 from src.application.usecases.base import BaseUsecase
@@ -14,7 +14,7 @@ class CreateTrackUsecase(BaseUsecase):
         self.release_repo = release_repo
         self.uow_factory = uow_factory
     
-    async def __call__(self, track_dto: ReleaseInputDTO):
+    async def __call__(self, track_dto: TrackInputDTO):
         uow = self.uow_factory()
         async with uow() as session:
             release = await self.release_repo.get_by_id(session, track_dto.release_id)
@@ -22,4 +22,4 @@ class CreateTrackUsecase(BaseUsecase):
 
             self.track_repo.create(session, track, release)
             
-            return ReleaseOutputDTO(**release.to_dict())
+            return track.id

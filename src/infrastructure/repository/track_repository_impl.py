@@ -12,7 +12,7 @@ from src.infrastructure.models.track import TrackModel
 class TrackRepository(IRepository):
     def create(self, session: AsyncSession, track: Track, release: Release):
         track_orm_model = TrackModel(
-            tarck_id = track.id,
+            track_id = track.id,
             title=track.title,
             duration=track.duration,
             release_fk=release.id
