@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends
 from src.presentation.http.dependencies.track_usecases import (
     get_all_tracks_usecase,
     get_create_track_usecase,
+    get_delete_track_usecase,
     get_track_usecase,
 )
 from src.presentation.http.mappers.track_mapper import (
@@ -35,4 +36,10 @@ async def get_track(track_id: UUID, usecase = Depends(get_track_usecase)):
     track = await usecase(track_id)
     response = dto_to_pydantic(track)
 
+    return response
+
+@router.delete("/{track_id}")
+async def delete_track(track_id: UUID, usecase = Depends(get_delete_track_usecase)):
+    response = await usecase(track_id)
+    
     return response

@@ -1,4 +1,5 @@
 from src.application.usecases.track.create_track_usecase import CreateTrackUsecase
+from src.application.usecases.track.delete_track_usecase import DeleteTrackUsecase
 from src.application.usecases.track.get_all_tracks_usecase import GetAllTracksUsecase
 from src.application.usecases.track.get_track_usecase import GetTrackUsecase
 from src.infrastructure.repository.release_repository_impl import ReleaseRepository
@@ -30,5 +31,13 @@ def get_track_usecase():
     repo = TrackRepository()
     
     usecase = GetTrackUsecase(repo, uow)
+
+    return usecase    
+
+def get_delete_track_usecase():
+    uow = UnitOfWorkSingletonFactory().create_uow_instance
+    repo = TrackRepository()
+    
+    usecase = DeleteTrackUsecase(repo, uow)
 
     return usecase    
