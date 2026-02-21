@@ -3,6 +3,7 @@ from collections import namedtuple
 
 from src.infrastructure.config.contract import IDatabaseConfig
 
+
 class S3Config(IDatabaseConfig):
     @property
     def database_uri(self) -> str:

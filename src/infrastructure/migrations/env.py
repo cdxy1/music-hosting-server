@@ -12,7 +12,7 @@ from src.infrastructure.models.author import AuthorModel  #NOQA
 from src.infrastructure.models.base import BaseOrmModel
 from src.infrastructure.models.genre import GenreModel  #NOQA
 from src.infrastructure.models.release import ReleaseModel  #NOQA
-from src.infrastructure.models.track import TrackModel #NOQA
+from src.infrastructure.models.track import TrackModel  #NOQA
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

@@ -1,5 +1,5 @@
-from io import BytesIO
 from contextlib import contextmanager
+from io import BytesIO
 
 from boto3 import Session
 
