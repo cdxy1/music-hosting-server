@@ -4,8 +4,8 @@ from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.application.repository.contract import IRepository
-from src.domain.entities.track import Track
 from src.domain.entities.release import Release
+from src.domain.entities.track import Track
 from src.infrastructure.models.track import TrackModel
 
 
