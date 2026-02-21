@@ -2,7 +2,7 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends
 
-from src.presentation.http.dependencies.genre_usecase import (
+from src.presentation.http.dependencies.genre_usecases import (
     get_all_genre_usecase,
     get_create_genre_usecase,
     get_delete_usecase,
