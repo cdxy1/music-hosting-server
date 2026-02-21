@@ -1,5 +1,6 @@
-from dataclasses import dataclass
-from uuid import UUID
+from dataclasses import dataclass, field
+from uuid import UUID, uuid4
+from typing import Optional
 
 from src.domain.entities.base import BaseEntity
 from src.domain.value_objects.audio import Audio
@@ -7,9 +8,9 @@ from src.domain.value_objects.audio import Audio
 
 @dataclass(frozen=True, slots=True)
 class Track(BaseEntity):
-    id: UUID
     title: str
-    duration: int
+    duration: Optional[int] = None
+    id: UUID = field(default_factory=uuid4)
 
     def __post_init__(self):
         self._ensure_id_is_uuid()
