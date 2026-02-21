@@ -10,6 +10,8 @@ from src.domain.value_objects.audio import Audio
 class Track(BaseEntity):
     title: str
     duration: Optional[int] = None
+    audio_dist: Optional[str] = None
+    image_dist: Optional[str] = None
     id: UUID = field(default_factory=uuid4)
 
     def __post_init__(self):

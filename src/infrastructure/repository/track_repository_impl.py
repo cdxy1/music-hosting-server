@@ -39,9 +39,9 @@ class TrackRepository(IRepository):
         result = await session.execute(stmt)
         track_from_db = result.scalars().all()
         
-        trakcs = tuple(Track(id=track.track_id, title=track.title, duration=track.duration) for track in track_from_db)
+        tracks = tuple(Track(id=track.track_id, title=track.title, duration=track.duration, audio_dist=track.audio_key, image_dist=track.image_key) for track in track_from_db)
                 
-        return tuple(trakcs)
+        return tuple(tracks)
         
     async def delete(self, session: AsyncSession, track_id: UUID):
         stmt = (delete(TrackModel).

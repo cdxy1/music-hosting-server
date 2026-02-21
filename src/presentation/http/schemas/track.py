@@ -1,12 +1,20 @@
+from typing import Optional
 from uuid import UUID
 
 from pydantic import BaseModel
 
 
-class GenreBase(BaseModel):
+class TrackBase(BaseModel):
     class Config:
         use_enum_values = True
 
-class CreateTrackRequest(GenreBase):
+class CreateTrackRequest(TrackBase):
     title: str
     release_id: UUID
+    
+class GetTrackResponse(TrackBase):
+    id: UUID
+    title: str
+    duration: Optional[int] = None
+    audio_dist: Optional[str] = None
+    image_dist: Optional[str] = None

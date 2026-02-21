@@ -1,14 +1,38 @@
+from uuid import UUID
+
 from fastapi import APIRouter, Depends
 
-from src.presentation.http.dependencies.track_usecases import get_create_release_usecase
-from src.presentation.http.mappers.track_mapper import pydantic_to_dto
+from src.presentation.http.dependencies.track_usecases import (
+    get_all_tracks_usecase,
+    get_create_track_usecase,
+    get_track_usecase,
+)
+from src.presentation.http.mappers.track_mapper import (
+    dto_to_pydantic,
+    many_dto_to_pydantic,
+    pydantic_to_dto,
+)
 from src.presentation.http.schemas.track import CreateTrackRequest
 
 router = APIRouter(prefix="/tracks", tags=["tracks"])
 
 @router.post("/")
-async def create_track(track: CreateTrackRequest, usecase = Depends(get_create_release_usecase)):
+async def create_track(track: CreateTrackRequest, usecase = Depends(get_create_track_usecase)):
     input_data = pydantic_to_dto(track)
     response = await usecase(input_data)
     
+    return response
+
+@router.get("/")
+async def get_all_tracks(usecase = Depends(get_all_tracks_usecase)):
+    tracks = await usecase()
+    response = many_dto_to_pydantic(tracks)
+
+    return response
+
+@router.get("/{track_id}")
+async def get_track(track_id: UUID, usecase = Depends(get_track_usecase)):
+    track = await usecase(track_id)
+    response = dto_to_pydantic(track)
+
     return response

@@ -9,17 +9,21 @@ from src.presentation.http.schemas.author import GetAuthorResponse
 from src.presentation.http.schemas.genre import GetGenreResponse
 
 
-class CreateReleaseRequest(BaseModel):
+class ReleaseBase(BaseModel):
+    class Config:
+        use_enum_values = True
+
+class CreateReleaseRequest(ReleaseBase):
     name: str
     author_id: UUID
     genre_id: UUID
     release_date: date
     release_type: ReleaseType
 
-class CreateReleaseResponse(BaseModel):
+class CreateReleaseResponse(ReleaseBase):
     id: UUID
 
-class GetReleaseResponse(BaseModel):
+class GetReleaseResponse(ReleaseBase):
     name: str
     author: GetAuthorResponse
     genre: GetGenreResponse
