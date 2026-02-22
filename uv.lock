@@ -404,6 +404,7 @@ dependencies = [
     { name = "boto3" },
     { name = "celery" },
     { name = "fastapi" },
+    { name = "python-dotenv" },
     { name = "sqlalchemy" },
     { name = "uvicorn" },
 ]
@@ -411,7 +412,6 @@ dependencies = [
 [package.dev-dependencies]
 dev = [
     { name = "pytest" },
-    { name = "python-dotenv" },
     { name = "ruff" },
 ]
 
@@ -422,6 +422,7 @@ requires-dist = [
     { name = "boto3", specifier = ">=1.42.54" },
     { name = "celery", specifier = ">=5.6.2" },
     { name = "fastapi", extras = ["standart"], specifier = ">=0.128.0" },
+    { name = "python-dotenv", specifier = ">=1.2.1" },
     { name = "sqlalchemy", specifier = ">=2.0.46" },
     { name = "uvicorn", specifier = ">=0.40.0" },
 ]
@@ -429,7 +430,6 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "pytest", specifier = ">=9.0.2" },
-    { name = "python-dotenv", specifier = ">=1.2.1" },
     { name = "ruff", specifier = ">=0.14.14" },
 ]
 
