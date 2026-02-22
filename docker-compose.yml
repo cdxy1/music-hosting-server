@@ -8,13 +8,17 @@ services:
     depends_on:
       - postgres
       - rabbitmq
-    environment:
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_NAME: ${DB_NAME}
-      DB_HOST: postgres
-      DB_PORT: ${DB_PORT}
-      APP_ENV: prod
+    env_file:
+      - .env
+
+  worker:
+    build: .
+    container_name: 'worker'
+    command: celery -A src.infrastructure.background_tasks.app worker --loglevel=INFO
+    env_file:
+      - .env
+    depends_on:
+      - rabbitmq
 
   postgres:
     image: postgres:15
@@ -36,7 +40,8 @@ services:
     image: rabbitmq:4.2.3-management
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
-      KRABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_VHOST}
     volumes:
       - rabbitmq:/var/lib/rabbitmq
     ports:
