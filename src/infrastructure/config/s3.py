@@ -14,14 +14,14 @@ class S3Config(IDatabaseConfig):
 
     @property
     def bucket_name(self):
-        s3_bucket = os.environ.get("S3_HOST")
+        s3_bucket = os.environ.get("S3_BUCKET")
         
         return s3_bucket
     
     @property
-    def credentials():
-        s3_user = os.environ.get("S3_HOST")
-        s3_password = os.environ.get("S3_PORT")
+    def credentials(self):
+        s3_user = os.environ.get("S3_USER")
+        s3_password = os.environ.get("S3_PASSWORD")
         
         Creds = namedtuple("Creds", ["user", "password"])
         cred = Creds(s3_user, s3_password)

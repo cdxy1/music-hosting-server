@@ -1,12 +1,12 @@
-from contextlib import contextmanager
 from io import BytesIO
 
 from boto3 import Session
+from botocore.exceptions import ClientError
 
 from src.infrastructure.config.contract import IDatabaseConfig
 
 
-class ObjectStorage:
+class S3Storage:
     def __init__(self, config: IDatabaseConfig):
         self.config = config
         
@@ -14,27 +14,59 @@ class ObjectStorage:
             aws_access_key_id=self.config.credentials.user,
             aws_secret_access_key=self.config.credentials.password,
         )
+        
+        if not self._is_bucket_exists():
+            self.create_bucket()
     
     
-    def upload_file(self, key, file):
-        file_content = BytesIO(file)
-        with self.get_s3minio_session() as session:
-            response = session.upload_fileobj(
-                file_content, self.config.bucket_name, key
-            )
-            return response
+    def upload_file(self, key, file_data):
+        file = BytesIO(file_data)
+        session = self.session.client(
+            "s3",
+            endpoint_url=self.config.database_uri
+        )
+        
+        response = session.upload_fileobj(
+            file, self.config.bucket_name, key
+        )
+        
+        return response
         
     def create_presigned_url(self, key):
-        with self.get_s3minio_session() as session:
-            response = session.generate_presigned_url(
+        session = self.session.client(
+            "s3",
+            endpoint_url=self.config.database_uri
+        )
+        
+        response = session.generate_presigned_url(
             'get_object',
-            Params={'Bucket': self.config.bucket_name, 'Key': key}, ExpiresIn=30*60)
+            Params={'Bucket': self.config.bucket_name, 'Key': key},
+            ExpiresIn=30*60 #! Надо будет переделать
+        )
             
         return response
     
-    @contextmanager
-    def get_s3minio_session(self):
-        with self.session.client(
-            "s3", endpoint_url=self.config.database_uri
-        ) as s3minio:
-            yield s3minio
+    
+    def create_bucket(self):
+        session = self.session.client(
+            "s3",
+            endpoint_url=self.config.database_uri
+        )
+        
+        if not self._is_bucket_exists():
+            session.create_bucket(
+                Bucket=self.config.bucket_name,
+            )
+
+    def _is_bucket_exists(self):
+        try:
+            session = self.session.client(
+                "s3",
+                endpoint_url=self.config.database_uri
+            )
+            session.head_bucket(
+                Bucket=self.config.bucket_name,
+            )
+            return True
+        except ClientError:
+            return False
