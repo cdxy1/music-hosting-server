@@ -2,10 +2,6 @@ import os
 
 from src.infrastructure.config.contract import IDatabaseConfig
 
-if os.environ.get("APP_ENV") != "prod":
-    from dotenv import load_dotenv
-    load_dotenv()
-
 class PostgresConfig(IDatabaseConfig):
     @property
     def database_uri(self) -> str:
