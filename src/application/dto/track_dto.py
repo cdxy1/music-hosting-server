@@ -8,6 +8,7 @@ from src.application.dto.base_dto import BaseDTO
 @dataclass(frozen=True, slots=True)
 class TrackInputDTO(BaseDTO):
     title: str
+    audio_data: str
     release_id: UUID
     
 @dataclass(frozen=True, slots=True)

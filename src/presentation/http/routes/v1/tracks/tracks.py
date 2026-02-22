@@ -1,6 +1,7 @@
 from uuid import UUID
+from base64 import b64encode
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, File, UploadFile, Form
 
 from src.presentation.http.dependencies.track_usecases import (
     get_all_tracks_usecase,
@@ -18,8 +19,16 @@ from src.presentation.http.schemas.track import CreateTrackRequest
 router = APIRouter(prefix="/tracks", tags=["tracks"])
 
 @router.post("/")
-async def create_track(track: CreateTrackRequest, usecase = Depends(get_create_track_usecase)):
-    input_data = pydantic_to_dto(track)
+async def create_track(
+    title: str = Form(...),
+    release_id: UUID = Form(...),
+    file: UploadFile = File(...), usecase = Depends(get_create_track_usecase)):
+    file_bytes = await file.read()
+    encode_file = b64encode(file_bytes).decode("utf-8")
+    
+    track = CreateTrackRequest(title=title, release_id=release_id)
+    
+    input_data = pydantic_to_dto(track, encode_file)
     response = await usecase(input_data)
     
     return response
