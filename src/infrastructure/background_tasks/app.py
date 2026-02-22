@@ -1,8 +1,8 @@
 from celery import Celery
 
 from src.infrastructure.config.rabbitmq import RabbitMQConfig
-from src.infrastructure.database.s3.database import S3Storage
 from src.infrastructure.config.s3 import S3Config
+from src.infrastructure.database.s3.database import S3Storage
 
 broker = RabbitMQConfig()
 

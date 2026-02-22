@@ -2,9 +2,9 @@ from src.application.usecases.track.create_track_usecase import CreateTrackUseca
 from src.application.usecases.track.delete_track_usecase import DeleteTrackUsecase
 from src.application.usecases.track.get_all_tracks_usecase import GetAllTracksUsecase
 from src.application.usecases.track.get_track_usecase import GetTrackUsecase
+from src.infrastructure.background_tasks.dispatcher import TasksDispatcher
 from src.infrastructure.repository.release_repository_impl import ReleaseRepository
 from src.infrastructure.repository.track_repository_impl import TrackRepository
-from src.infrastructure.background_tasks.dispatcher import TasksDispatcher
 from src.infrastructure.unit_of_work.unit_of_work_factory import (
     UnitOfWorkSingletonFactory,
 )

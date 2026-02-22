@@ -1,5 +1,6 @@
 import os
 
+
 class RabbitMQConfig:
     @property
     def broker_uri(self):

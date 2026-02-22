@@ -2,6 +2,7 @@ import os
 
 from src.infrastructure.config.contract import IDatabaseConfig
 
+
 class PostgresConfig(IDatabaseConfig):
     @property
     def database_uri(self) -> str:

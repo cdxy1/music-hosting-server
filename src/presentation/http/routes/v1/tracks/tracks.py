@@ -1,7 +1,7 @@
-from uuid import UUID
 from base64 import b64encode
+from uuid import UUID
 
-from fastapi import APIRouter, Depends, File, UploadFile, Form
+from fastapi import APIRouter, Depends, File, Form, UploadFile
 
 from src.presentation.http.dependencies.track_usecases import (
     get_all_tracks_usecase,
