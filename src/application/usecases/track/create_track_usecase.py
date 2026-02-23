@@ -23,6 +23,6 @@ class CreateTrackUsecase(BaseUsecase):
             track = Track(title=track_dto.title)
 
             self.track_repo.create(session, track, release)
-            self.dispatcher.dispatch_upload_file(f"audio/{track.id}", track_dto.audio_data)
+            self.dispatcher.dispatch_upload_file(track.id, track_dto.audio_data)
             
             return track.id
