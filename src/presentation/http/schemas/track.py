@@ -16,5 +16,5 @@ class GetTrackResponse(TrackBase):
     id: UUID
     title: str
     duration: Optional[int] = None
-    audio_dist: Optional[str] = None
-    image_dist: Optional[str] = None
+    audio_key: Optional[str] = None
+    image_key: Optional[str] = None
