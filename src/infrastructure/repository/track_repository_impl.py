@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from sqlalchemy import delete, select
+from sqlalchemy import delete, select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.application.repository.contract import IRepository
@@ -39,7 +39,7 @@ class TrackRepository(IRepository):
         result = await session.execute(stmt)
         track_from_db = result.scalars().all()
         
-        tracks = tuple(Track(id=track.track_id, title=track.title, duration=track.duration, audio_dist=track.audio_key, image_dist=track.image_key) for track in track_from_db)
+        tracks = tuple(Track(id=track.track_id, title=track.title, duration=track.duration, audio_key=track.audio_key, image_key=track.image_key) for track in track_from_db)
                 
         return tuple(tracks)
         
@@ -49,5 +49,13 @@ class TrackRepository(IRepository):
         
         await session.execute(stmt)
         
-    async def update(self, session: AsyncSession):
-        ...
+    async def update(self, session: AsyncSession, track: Track):
+        data_to_update = {k: v if not isinstance(v, UUID) else str(v) 
+                          for k, v in track.to_dict().items() 
+                          if k != "id" and v}
+        
+        stmt = (update(TrackModel).
+                where(TrackModel.track_id == track.id).
+                values(**data_to_update))
+        
+        await session.execute(stmt)
