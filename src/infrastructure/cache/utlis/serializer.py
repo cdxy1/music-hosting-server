@@ -15,12 +15,20 @@ def deserialize_json_to_dto(data):
     if not data:
         raise
     
-    dto = namedtuple("DTO", data[0].keys())
+    loaded_data = json.loads(data)
+    dto = namedtuple("DTO", loaded_data[0].keys())
+    dto.to_dict = lambda: dto._asdict()
     
-    if len(data) > 1:
-        return [dto(**obj) for obj in data]
-    elif len(data) == 1:
-        return dto(**data[0])
+    for k, v in loaded_data[0].items():
+        if _is_json(v):
+            loaded_data[0][k] = deserialize_json_to_dto(v)
+    
+    if len(loaded_data) > 1:        
+        deserialized_data = [dto(**obj) for obj in loaded_data]
+    elif len(loaded_data) == 1:
+        deserialized_data = dto(**loaded_data[0])
+   
+    return deserialized_data
     
 def _convert_object_to_serializable(data):
     if isinstance(data, UUID):
@@ -40,3 +48,16 @@ def _convert_uuid_to_str(id):
 
 def _convert_date_to_str(obj_date):
     return str(obj_date)
+
+def _is_json(data: str):
+    if not data.startswith(("[", "{")):
+        return False
+
+    try:
+        json.loads(data)
+    except ValueError:
+        return False
+    return True
+
+def _create_dto(keys):
+    
