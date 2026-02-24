@@ -10,6 +10,8 @@ from src.infrastructure.repository.release_repository_impl import ReleaseReposit
 from src.infrastructure.unit_of_work.unit_of_work_factory import (
     UnitOfWorkSingletonFactory,
 )
+from src.infrastructure.cache.cache import CacheWrapper
+from src.infrastructure.database.redis.database import RedisCache
 
 
 def get_create_release_usecase():
@@ -25,23 +27,26 @@ def get_create_release_usecase():
 def get_release_usecase():
     uow = UnitOfWorkSingletonFactory().create_uow_instance
     repo = ReleaseRepository()
+    cache = CacheWrapper(RedisCache())
     
-    usecase = GetReleaseUsecase(repo, uow)
+    usecase = GetReleaseUsecase(repo, uow, cache)
     
     return usecase
 
 def get_all_releases_usecase():
     uow = UnitOfWorkSingletonFactory().create_uow_instance
     repo = ReleaseRepository()
+    cache = CacheWrapper(RedisCache())
     
-    usecase = GetAllReleasesUsecase(repo, uow)
+    usecase = GetAllReleasesUsecase(repo, uow, cache)
     
     return usecase
 
 def get_delete_release_usecase():
     uow = UnitOfWorkSingletonFactory().create_uow_instance
     repo = ReleaseRepository()
+    cache = CacheWrapper(RedisCache())
     
-    usecase = DeleteReleaseUsecase(repo, uow)
+    usecase = DeleteReleaseUsecase(repo, uow, cache)
     
     return usecase
