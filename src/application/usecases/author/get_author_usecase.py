@@ -8,6 +8,6 @@ class GetAuthorUsecase(BaseUsecase):
     async def __call__(self, author_id: UUID):
         uow = self.uow_factory()
         async with uow() as session:
-            author = await self.repo.get_by_id(session, author_id)
+            author = await self.cache.get_or_create(f"authors:{author_id}", lambda: self.repo.get_by_id(session, author_id))
             
             return AuthorDTO(author.name, author.type, author.id)
