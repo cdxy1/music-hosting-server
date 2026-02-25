@@ -8,6 +8,6 @@ class GetReleaseUsecase(BaseUsecase):
     async def __call__(self, release_id: UUID):
         uow = self.uow_factory()
         async with uow() as session:
-            release = await self.repo.get_by_id(session, release_id)
+            release = await self.cache.get_or_create(f"releases:{release_id}", lambda: self.repo.get_by_id(session, release_id))
             
             return ReleaseOutputDTO(**release.to_dict())
