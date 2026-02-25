@@ -3,15 +3,13 @@ from src.application.usecases.track.delete_track_usecase import DeleteTrackUseca
 from src.application.usecases.track.get_all_tracks_usecase import GetAllTracksUsecase
 from src.application.usecases.track.get_track_usecase import GetTrackUsecase
 from src.infrastructure.background_tasks.dispatcher import TasksDispatcher
+from src.infrastructure.cache.cache import CacheWrapper
+from src.infrastructure.database.redis.database import RedisCache
 from src.infrastructure.repository.release_repository_impl import ReleaseRepository
 from src.infrastructure.repository.track_repository_impl import TrackRepository
 from src.infrastructure.unit_of_work.unit_of_work_factory import (
     UnitOfWorkSingletonFactory,
 )
-from src.infrastructure.cache.cache import CacheWrapper
-from src.infrastructure.database.redis.database import RedisCache
-
-
 
 
 def get_create_track_usecase():
@@ -19,8 +17,9 @@ def get_create_track_usecase():
     track_repo = TrackRepository()
     release_repo = ReleaseRepository()
     task_dispatcher = TasksDispatcher()
+    cache = CacheWrapper(RedisCache())
     
-    usecase = CreateTrackUsecase(track_repo=track_repo, release_repo=release_repo, dispatcher=task_dispatcher,uow_factory=uow)
+    usecase = CreateTrackUsecase(track_repo=track_repo, release_repo=release_repo, dispatcher=task_dispatcher,uow_factory=uow, cache=cache)
 
     return usecase
 
