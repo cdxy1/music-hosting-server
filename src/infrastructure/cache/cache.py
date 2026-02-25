@@ -1,8 +1,11 @@
-import json
 from typing import Callable
 
 from src.infrastructure.cache.contract import ICache
-from src.infrastructure.cache.utlis.serializer import serialize_to_json, deserialize_json_to_dto
+from src.infrastructure.cache.utlis.serializer import (
+    deserialize_json_to_dto,
+    serialize_to_json,
+)
+
 
 class CacheWrapper:
     def __init__(self, cache: ICache):
