@@ -16,10 +16,10 @@ def deserialize_json_to_dto(data):
         raise
     
     loaded_data = json.loads(data)
-    dto = namedtuple("DTO", loaded_data[0].keys())
-    dto.to_dict = lambda: dto._asdict()
+    dto = _create_dto(loaded_data[0].keys())
     
     for k, v in loaded_data[0].items():
+        loaded_data[0][k] = sanitize_deserialized_obj(v)
         if _is_json(v):
             loaded_data[0][k] = deserialize_json_to_dto(v)
     
@@ -60,4 +60,24 @@ def _is_json(data: str):
     return True
 
 def _create_dto(keys):
+    obj = namedtuple("DTO", keys)
+
+    class DTO(obj):
+        slots = ()
+        
+        def to_dict(self):
+            temp = self._asdict()
+            
+            for k, v in temp.items():
+                if isinstance(v, tuple):
+                    temp[k] = v._asdict()
+            return temp
+            
+    return DTO
+
+def sanitize_deserialized_obj(data: str):
+    data_copy = data.strip()
     
+    if '"' in data_copy and not data_copy.startswith(("[", "{")):
+        return data_copy.replace('"', "")
+    return data
