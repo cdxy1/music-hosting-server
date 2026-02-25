@@ -8,6 +8,6 @@ class GetTrackUsecase(BaseUsecase):
     async def __call__(self, track_id: UUID):
         uow = self.uow_factory()
         async with uow() as session:
-            track = await self.repo.get_by_id(session, track_id)
+            track = await self.cache.get_or_create(f"tracks:{track_id}", lambda: self.repo.get_by_id(session, track_id))
             
             return TrackOutputDTO(**track.to_dict())

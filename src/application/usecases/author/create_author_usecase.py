@@ -10,4 +10,5 @@ class CreateAuthorUsecase(BaseUsecase):
             author = Author(name=author_dto.name, type=author_dto.type)
             self.repo.create(session, author)
             
+            await self.cache.invalidate_cache(["authors:all"])
             return AuthorDTO(author.name, author.type, author.id)

@@ -9,4 +9,5 @@ class DeleteGenreUsecase(BaseUsecase):
         async with uow() as session:
             await self.repo.delete(session, genre_id)
             
+            await self.cache.invalidate_cache(["genres:all", f"genres:{genre_id}"])
             return genre_id

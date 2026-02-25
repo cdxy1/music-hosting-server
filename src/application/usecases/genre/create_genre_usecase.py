@@ -10,4 +10,5 @@ class CreateGenreUsecase(BaseUsecase):
             genre = Genre(title=genre_dto.title)
             self.repo.create(session, genre)
             
+            await self.cache.invalidate_cache(["genres:all"])
             return GenreDTO(title=genre.title, id=genre.id)

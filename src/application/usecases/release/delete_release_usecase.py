@@ -9,4 +9,5 @@ class DeleteReleaseUsecase(BaseUsecase):
         async with uow() as session:
             await self.repo.delete(session, release_id)
             
+            await self.cache.invalidate_cache(["releases:all", f"releases:{release_id}"])
             return release_id

@@ -12,4 +12,5 @@ class UpdateAuthorUsecase(BaseUsecase):
             updated_author = author.update(**data_to_update.to_dict())
             await self.repo.update(session, updated_author)
             
+            await self.cache.invalidate_cache(["authors:all", f"authors:{author_id}"])
             return updated_author.id

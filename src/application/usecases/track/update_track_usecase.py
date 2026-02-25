@@ -12,4 +12,5 @@ class UpdateTrackUsecase(BaseUsecase):
             updated_track = track.update(**data_to_update.to_dict())
             await self.repo.update(session, updated_track)
             
+            await self.cache.invalidate_cache(["tracks:all", f"tracks:{track_id}"])
             return updated_track.id

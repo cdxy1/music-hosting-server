@@ -1,8 +1,8 @@
 from typing import Callable
 
+from src.application.cache.contract import ICacheWrapper
 from src.application.repository.contract import IRepository
 from src.application.unit_of_work.contract import IUnitOfWork
-from src.application.cache.contract import ICacheWrapper
 
 
 class BaseUsecase:

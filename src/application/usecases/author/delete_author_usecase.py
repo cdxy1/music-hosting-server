@@ -9,4 +9,5 @@ class DeleteAuthorUsecase(BaseUsecase):
         async with uow() as session:
             await self.repo.delete(session, author_id)
             
+            await self.cache.invalidate_cache(["authors:all", f"authors:{author_id}"])
             return author_id

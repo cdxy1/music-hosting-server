@@ -6,6 +6,6 @@ class GetAllTracksUsecase(BaseUsecase):
     async def __call__(self):
         uow = self.uow_factory()
         async with uow() as session:
-            tracks = await self.repo.get_all(session)
+            tracks = await self.cache.get_or_create("tracks:all", lambda: self.repo.get_all(session))
             
             return tuple(TrackOutputDTO(**track.to_dict()) for track in tracks)
