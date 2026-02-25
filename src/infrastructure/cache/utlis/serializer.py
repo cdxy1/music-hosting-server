@@ -17,17 +17,19 @@ def deserialize_json_to_dto(data):
     
     loaded_data = json.loads(data)
     dto = _create_dto(loaded_data[0].keys())
-    
-    for k, v in loaded_data[0].items():
-        loaded_data[0][k] = sanitize_deserialized_obj(v)
-        if _is_json(v):
-            loaded_data[0][k] = deserialize_json_to_dto(v)
+ 
+    for obj in loaded_data:
+        for k, v in obj.items():
+            obj[k] = _sanitize_deserialized_obj(v)
+
+            if _is_json(v):
+                obj[k] = deserialize_json_to_dto(v)
     
     if len(loaded_data) > 1:        
         deserialized_data = [dto(**obj) for obj in loaded_data]
     elif len(loaded_data) == 1:
         deserialized_data = dto(**loaded_data[0])
-   
+    
     return deserialized_data
     
 def _convert_object_to_serializable(data):
@@ -75,9 +77,25 @@ def _create_dto(keys):
             
     return DTO
 
-def sanitize_deserialized_obj(data: str):
+def _sanitize_deserialized_obj(data: str):
     data_copy = data.strip()
-    
-    if '"' in data_copy and not data_copy.startswith(("[", "{")):
-        return data_copy.replace('"', "")
+
+    if '"' in data_copy:
+        sanitized_data = data_copy.replace('"', "")
+        
+        if casted_data := _cast_to_type(sanitized_data):
+            return casted_data
+        
+        return sanitized_data
     return data
+
+def _cast_to_type(data):
+    if obj := _cast_to_uuid(data):
+        return obj
+
+def _cast_to_uuid(data):
+    try:
+        obj = UUID(data)
+        return obj
+    except ValueError:
+        return None
