@@ -1,11 +1,12 @@
 import json
-from uuid import UUID
 from collections import namedtuple
 from datetime import date
+from uuid import UUID
 
+from src.domain.entities.base import BaseEntity
 from src.infrastructure.models.base import BaseOrmModel
 
-UNSERIALIZABLE_TYPES = (UUID, BaseOrmModel, date)
+UNSERIALIZABLE_TYPES = (date, dict, UUID, BaseOrmModel, BaseEntity)
 
 def serialize_to_json(data):
     serialized_data = json.dumps(_convert_object_to_serializable(data))
@@ -40,9 +41,11 @@ def _convert_object_to_serializable(data):
     
     if isinstance(data, (tuple, list, set)):
         list_data = [{k: v if not isinstance(v, UNSERIALIZABLE_TYPES) else serialize_to_json(v) for k,v in obj.to_dict().items()} for obj in data]
+    elif isinstance(data, dict):
+        list_data = [{k: v if not isinstance(v, UNSERIALIZABLE_TYPES) else serialize_to_json(v) for k,v in data.items()}]
     else:
         list_data = [{k: v if not isinstance(v, UNSERIALIZABLE_TYPES) else serialize_to_json(v) for k,v in data.to_dict().items()}]
-        
+
     return list_data    
 
 def _convert_uuid_to_str(id):
@@ -52,6 +55,9 @@ def _convert_date_to_str(obj_date):
     return str(obj_date)
 
 def _is_json(data: str):
+    if not data:
+        return False
+    
     if not data.startswith(("[", "{")):
         return False
 
@@ -78,6 +84,9 @@ def _create_dto(keys):
     return DTO
 
 def _sanitize_deserialized_obj(data: str):
+    if not data:
+        return data
+    
     data_copy = data.strip()
 
     if '"' in data_copy:
