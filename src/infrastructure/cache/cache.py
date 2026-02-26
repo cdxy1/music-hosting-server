@@ -1,7 +1,7 @@
 from typing import Callable
 
 from src.infrastructure.cache.contract import ICache
-from src.infrastructure.cache.utlis.serializer import (
+from src.infrastructure.cache.utils.serializer import (
     deserialize_json_to_dto,
     serialize_to_json,
 )
