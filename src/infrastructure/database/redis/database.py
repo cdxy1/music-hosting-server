@@ -1,5 +1,6 @@
 from typing import Optional
 
+import redis
 from redis import ConnectionError
 from redis import asyncio as aioredis
 
@@ -26,6 +27,9 @@ class RedisCache:
     async def connect(self):
         self._connection = await aioredis.from_url(self._config.database_uri, decode_responses=True)
 
+    def sync_connect(self):
+        self._connection = redis.from_url(self._config.database_uri, decode_responses=True)
+    
     async def close(self):
         if self._connection:
             await self._connection.close()
