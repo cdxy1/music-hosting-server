@@ -25,7 +25,7 @@ class CreateTrackUsecase(BaseUsecase):
             track = Track(title=track_dto.title)
 
             self.track_repo.create(session, track, release)
-            self.dispatcher.dispatch_upload_file(track.id, track_dto.audio_data)
+            self.dispatcher.dispatch_upload_file("tracks", track.id, track_dto.audio_data)
             
-            await self.cache.invalidate_cache(["authors:all"])
+            await self.cache.invalidate_cache(["tracks:all"])
             return track.id

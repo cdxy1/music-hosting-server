@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from src.infrastructure.config.postgres import PostgresConfig
 from src.infrastructure.config.redis import RedisConfig
 from src.infrastructure.database.postgres.database import PostgresDatabase
-from src.infrastructure.database.redis.database import RedisCache
+from src.infrastructure.database.redis.database import AsyncRedisCache
 from src.infrastructure.unit_of_work.unit_of_work_factory import (
     UnitOfWorkSingletonFactory,
 )
@@ -17,7 +17,7 @@ async def lifespan(app: FastAPI):
     database_config = PostgresConfig()
     cache_config = RedisConfig()
     database = PostgresDatabase(database_config)
-    cache = RedisCache(cache_config)
+    cache = AsyncRedisCache(cache_config)
     UnitOfWorkSingletonFactory(database)
     await cache.connect()
     yield
