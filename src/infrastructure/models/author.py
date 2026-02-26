@@ -11,5 +11,6 @@ class AuthorModel(BaseOrmModel):
     author_id: Mapped[UUID] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(nullable=False, unique=True)
     type: Mapped[str] = mapped_column(nullable=False)
+    # image_key: Mapped[str] = mapped_column(unique=True, nullable=True)
     
     release = relationship("ReleaseModel", back_populates="author", uselist=True, lazy="selectin")
