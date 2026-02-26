@@ -30,7 +30,8 @@ class TrackRepository(IRepository):
         return Track(
             id=track_from_db.track_id,
             title=track_from_db.title,
-            duration=track_from_db.duration
+            duration=track_from_db.duration,
+            audio_key=track_from_db.audio_key
         )
         
     async def get_all(self, session: AsyncSession):
