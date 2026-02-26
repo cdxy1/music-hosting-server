@@ -40,7 +40,7 @@ class TrackRepository(IRepository):
         result = await session.execute(stmt)
         track_from_db = result.scalars().all()
         
-        tracks = tuple(Track(id=track.track_id, title=track.title, duration=track.duration, audio_key=track.audio_key, image_key=track.image_key) for track in track_from_db)
+        tracks = tuple(Track(id=track.track_id, title=track.title, duration=track.duration, audio_key=track.audio_key) for track in track_from_db)
                 
         return tuple(tracks)
         

@@ -17,7 +17,6 @@ class TrackOutputDTO(BaseDTO):
     title: str
     duration: Optional[int] = None
     audio_key: Optional[str] = None
-    image_key: Optional[str] = None
     
 
 @dataclass(frozen=True, slots=True)
@@ -25,4 +24,3 @@ class UpdateTrackDTO(BaseDTO):
     title: Optional[str] = None
     duration: Optional[int] = None
     audio_key: Optional[str] = None
-    image_key: Optional[str] = None    

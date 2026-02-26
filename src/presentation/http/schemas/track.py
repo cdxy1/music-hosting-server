@@ -17,4 +17,3 @@ class GetTrackResponse(TrackBase):
     title: str
     duration: Optional[int] = None
     audio_key: Optional[str] = None
-    image_key: Optional[str] = None
