@@ -16,7 +16,7 @@ class TrackOutputDTO(BaseDTO):
     id: UUID
     title: str
     duration: Optional[int] = None
-    audio_key: Optional[str] = None
+    audio_url: Optional[str] = None
     
 
 @dataclass(frozen=True, slots=True)
