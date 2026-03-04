@@ -29,3 +29,11 @@ class Track(BaseEntity):
                      title=title if title else self.title, duration=duration if duration else self.duration, 
                      audio_key=audio_key if audio_key else self.audio_key,
                      )
+
+    def to_dict_with_url(self, audio_url: str) -> dict:
+        return {
+            "id": self.id,
+            "title": self.title,
+            "duration": self.duration,
+            "audio_url": audio_url
+        }
