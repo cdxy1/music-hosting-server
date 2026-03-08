@@ -36,6 +36,7 @@ class ReleaseRepository(IRepository):
             genre=release_from_db.genre,
             release_type=release_from_db.release_type,
             release_date=release_from_db.release_date,
+            image_key=release_from_db.image_key,
             id=release_from_db.release_id
         )
         
@@ -50,7 +51,7 @@ class ReleaseRepository(IRepository):
             author = Author(name=release.author.name, type=release.author.type, id=release.author.author_id)
             genre = Genre(title=release.genre.title, id=release.genre.genre_id)
             
-            releases.append(Release(name=release.name, author=author, genre=genre, release_type=release.release_type, release_date=release.release_date,id=release.release_id))
+            releases.append(Release(name=release.name, author=author, genre=genre, release_type=release.release_type, release_date=release.release_date,id=release.release_id, image_key=release.image_key))
                 
         return tuple(releases)
         

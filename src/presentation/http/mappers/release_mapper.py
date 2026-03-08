@@ -6,8 +6,8 @@ from src.presentation.http.schemas.release import (
 )
 
 
-def pydantic_to_dto(input: CreateReleaseRequest):
-    return ReleaseInputDTO(**input.model_dump())
+def pydantic_to_dto(input: CreateReleaseRequest, image_data: str):
+    return ReleaseInputDTO(**input.model_dump(), image_data=image_data)
 
 def dto_to_pydantic(output):
     return CreateReleaseResponse(**output.to_dict())

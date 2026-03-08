@@ -1,7 +1,10 @@
+from base64 import b64encode
+from datetime import date
 from uuid import UUID
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, File, UploadFile
 
+from src.domain.enums.release_type import ReleaseType
 from src.presentation.http.dependencies.release_usecases import (
     get_all_releases_usecase,
     get_create_release_usecase,
@@ -9,7 +12,6 @@ from src.presentation.http.dependencies.release_usecases import (
     get_release_usecase,
 )
 from src.presentation.http.mappers.release_mapper import (
-    dto_to_pydantic,
     many_dto_to_pydantic,
     pydantic_to_dto,
 )
@@ -18,10 +20,21 @@ from src.presentation.http.schemas.release import CreateReleaseRequest
 router = APIRouter(prefix="/releases", tags=["releases"])
 
 @router.post("/")
-async def create_release(release: CreateReleaseRequest, usecase = Depends(get_create_release_usecase)):
-    input_data = pydantic_to_dto(release)
-    release = await usecase(input_data)
-    response = dto_to_pydantic(release)
+async def create_release(
+    name: str,
+    author_id: UUID,
+    genre_id: UUID,
+    release_date: date,
+    release_type: ReleaseType,
+    file: UploadFile = File(...),
+    usecase = Depends(get_create_release_usecase)):
+    file_bytes = await file.read()
+    encode_file = b64encode(file_bytes).decode("utf-8")
+    
+    release = CreateReleaseRequest(name=name, author_id=author_id, genre_id=genre_id, release_date=release_date, release_type=release_type)
+    input_data = pydantic_to_dto(release, encode_file)
+    
+    response = await usecase(input_data)
     
     return response
 
