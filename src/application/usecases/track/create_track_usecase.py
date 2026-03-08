@@ -1,12 +1,12 @@
 from typing import Callable, override
 
+from src.application.cache.contract import ICacheWrapper
 from src.application.dispatcher.contract import IDispatcher
 from src.application.dto.track_dto import TrackInputDTO
 from src.application.repository.contract import IRepository
 from src.application.unit_of_work.contract import IUnitOfWork
 from src.application.usecases.base import BaseUsecase
 from src.domain.entities.track import Track
-from src.application.cache.contract import ICacheWrapper
 
 
 class CreateTrackUsecase(BaseUsecase):

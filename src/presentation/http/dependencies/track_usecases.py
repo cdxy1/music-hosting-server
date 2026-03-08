@@ -4,6 +4,7 @@ from src.application.usecases.track.get_all_tracks_usecase import GetAllTracksUs
 from src.application.usecases.track.get_track_usecase import GetTrackUsecase
 from src.infrastructure.background_tasks.dispatcher import TasksDispatcher
 from src.infrastructure.cache.cache import CacheWrapper
+from src.infrastructure.config.s3 import S3Config
 from src.infrastructure.database.redis.database import AsyncRedisCache
 from src.infrastructure.database.s3.adapter import S3Adapter
 from src.infrastructure.database.s3.database import S3Storage
@@ -12,7 +13,6 @@ from src.infrastructure.repository.track_repository_impl import TrackRepository
 from src.infrastructure.unit_of_work.unit_of_work_factory import (
     UnitOfWorkSingletonFactory,
 )
-from src.infrastructure.config.s3 import S3Config
 
 
 def get_create_track_usecase():

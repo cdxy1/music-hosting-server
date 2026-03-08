@@ -30,10 +30,18 @@ class Track(BaseEntity):
                      audio_key=audio_key if audio_key else self.audio_key,
                      )
 
-    def to_dict_with_url(self, audio_url: str) -> dict:
-        return {
-            "id": self.id,
-            "title": self.title,
-            "duration": self.duration,
-            "audio_url": audio_url
-        }
+    @staticmethod
+    def to_dict_with_url(obj, audio_url: str) -> dict:
+        if isinstance(obj, Track):
+            return {
+                "id": obj.id,
+                "title": obj.title,
+                "duration": obj.duration,
+                "audio_url": audio_url
+            }
+        else:
+            new_obj = obj.to_dict()
+            new_obj.pop("audio_key")
+            new_obj["audio_url"] = audio_url
+            
+            return new_obj

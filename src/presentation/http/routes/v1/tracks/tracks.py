@@ -22,7 +22,8 @@ router = APIRouter(prefix="/tracks", tags=["tracks"])
 async def create_track(
     title: str = Form(...),
     release_id: UUID = Form(...),
-    file: UploadFile = File(...), usecase = Depends(get_create_track_usecase)):
+    file: UploadFile = File(...), 
+    usecase = Depends(get_create_track_usecase)):
     file_bytes = await file.read()
     encode_file = b64encode(file_bytes).decode("utf-8")
     

@@ -2,6 +2,7 @@ from typing import override
 
 from src.application.dto.track_dto import TrackOutputDTO
 from src.application.usecases.base import BaseUsecase
+from src.domain.entities.track import Track
 
 
 class GetAllTracksUsecase(BaseUsecase):
@@ -19,7 +20,7 @@ class GetAllTracksUsecase(BaseUsecase):
             for track in tracks:
                 track_url = self.file_storage.get_file_url(track.audio_key) if track.audio_key else None
                 
-                track_with_url = track.to_dict_with_url(track_url)
+                track_with_url = Track.to_dict_with_url(track, track_url)
                 tracks_with_url.append(track_with_url)
             
             return tuple(TrackOutputDTO(**track) for track in tracks_with_url)
