@@ -29,4 +29,5 @@ class GetReleaseResponse(ReleaseBase):
     genre: GetGenreResponse
     release_date: date
     release_type: ReleaseType
+    image_url: Optional[str] = None
     id: Optional[UUID] = None

@@ -16,8 +16,8 @@ class ReleaseOutputDTO(BaseDTO):
     genre: GenreDTO
     release_date: date
     release_type: ReleaseType
+    image_url: str
     id: Optional[UUID] = None
-    # tracks: list[TrackDTO]
 
 @dataclass(frozen=True, slots=True)
 class ReleaseInputDTO(BaseDTO):
@@ -26,3 +26,5 @@ class ReleaseInputDTO(BaseDTO):
     genre_id: UUID
     release_date: date
     release_type: ReleaseType
+    image_data: str
+
