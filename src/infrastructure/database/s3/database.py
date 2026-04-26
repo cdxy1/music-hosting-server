@@ -41,7 +41,7 @@ class S3Storage:
         response = session.generate_presigned_url(
             'get_object',
             Params={'Bucket': self.config.bucket_name, 'Key': key},
-            ExpiresIn=30*60 #! Надо будет переделать
+            ExpiresIn=30*60
         )
             
         return response

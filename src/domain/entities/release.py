@@ -7,7 +7,6 @@ from src.domain.entities.author import Author
 from src.domain.entities.base import BaseEntity
 from src.domain.entities.genre import Genre
 
-# from src.domain.entities.track import Track
 from src.domain.enums.release_type import ReleaseType
 
 
@@ -16,7 +15,6 @@ class Release(BaseEntity):
     name: str
     author: Author
     genre: Genre
-    # tracks: list[Track]
     release_type: ReleaseType
     release_date: date
     image_key: Optional[str] = None

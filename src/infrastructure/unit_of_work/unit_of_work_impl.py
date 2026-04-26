@@ -1,4 +1,3 @@
-# from typing import Any
 from contextlib import asynccontextmanager
 
 from src.application.unit_of_work.contract import IUnitOfWork
