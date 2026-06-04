@@ -5,7 +5,6 @@
 </div>
 
 ## Основные возможности:
-- Управление авторами, жанрами, релизами и треками
 - Загрузка и хранение аудио/изображений в объектное хранилище
 - Кеширование
 - Асинхронная обработка/загрузка через RabbitMQ
@@ -28,8 +27,8 @@
 
 ### Клонирование репозитория
 ```bash
-git clone https://github.com/cdxy1/music-hosting-server.git
-cd music-hosting-server
+git clone https://github.com/cdxy1/python-clean-architecture.git
+cd python-clean-architecture
 ```
 
 ### Настройка окружения
